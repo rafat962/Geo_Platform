@@ -1,6 +1,5 @@
 import React from "react";
-
-import Pie3DChart from "./utils/pie3DChart";
+import Pie3DChart from "./utils/Pie3DChart";
 import Bar3DChart from "./utils/bar3DChart";
 const Charts3D = () => {
     return (

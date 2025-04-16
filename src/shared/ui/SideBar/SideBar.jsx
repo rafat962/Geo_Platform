@@ -38,7 +38,7 @@ const SideBar = () => {
                         ? "right-50 hover:translate-x-1"
                         : "right-10 scale-90 hover:-translate-x-1 rotate-180"
                 }  top-30 z-10 cursor-pointer  hover:scale-105 transition-all ease-in-out duration-400 animate-spin-every-5s`}
-                src="/public/next.png"
+                src="/next.png"
                 sx={{
                     width: 22,
                     height: 22,
@@ -51,7 +51,7 @@ const SideBar = () => {
                 <div className="flex flex-col items-center justify-center mb-5 space-y-2 tracking-wider  w-full">
                     {/* lgCase */}
                     <Avatar
-                        src="/public/users/profile.png"
+                        src="/users/profile.png"
                         sx={{ width: 58, height: 58 }}
                         className={` ${
                             openNav ? "scale-100" : "scale-75"
