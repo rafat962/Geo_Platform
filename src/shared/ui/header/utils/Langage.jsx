@@ -16,7 +16,7 @@ const Langage = () => {
             <Avatar
                 variant="rounded"
                 className="cursor-pointer active:scale-110 trans "
-                src="/public/header/Arabic.png"
+                src="/header/Arabic.png"
                 sx={{
                     width: 40,
                     height: 40,
@@ -38,7 +38,7 @@ const Langage = () => {
                         <div className="w-8 h-8 object-cover">
                             <img
                                 className=""
-                                src="/public/header/English.png"
+                                src="/header/English.png"
                                 alt=""
                             />
                         </div>
@@ -48,11 +48,7 @@ const Langage = () => {
                 <MenuItem onClick={handleClose}>
                     <div className="flex items-center justify-center space-x-6">
                         <div className="w-8 h-8 object-cover">
-                            <img
-                                className=""
-                                src="/public/header/Arabic.png"
-                                alt=""
-                            />
+                            <img className="" src="/header/Arabic.png" alt="" />
                         </div>
                         <p className="text-sm tracking-wider">Arabic</p>
                     </div>

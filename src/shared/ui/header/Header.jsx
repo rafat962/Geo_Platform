@@ -20,7 +20,7 @@ const Header = () => {
                         {/* Dark */}
                         <Dark darkMode={darkMode} setDarkMode={setDarkMode} />
                         {/* Notification */}
-                        {/* <Notification /> */}
+                        <Notification />
                     </div>
                     {/* SearchBar */}
                     <Search />
@@ -31,7 +31,7 @@ const Header = () => {
                         <Avatar
                             variant="rounded"
                             className="cursor-pointer active:scale-110 trans"
-                            src="/public/header/white-logo.png"
+                            src="/header/white-logo.png"
                             sx={{
                                 width: 52,
                                 height: 52,
@@ -42,7 +42,7 @@ const Header = () => {
                         <Avatar
                             variant="rounded"
                             className="cursor-pointer active:scale-110 trans"
-                            src="/public/header/R.K logo.png"
+                            src="/header/R.K logo.png"
                             sx={{
                                 width: 52,
                                 height: 52,

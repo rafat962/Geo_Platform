@@ -30,17 +30,17 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
     useEffect(() => {
         setImages([
             {
-                itemImageSrc: "/public/building/4.jpg",
+                itemImageSrc: "/building/4.jpg",
                 alt: "Description for Image 1",
                 title: "Title 1",
             },
             {
-                itemImageSrc: "/public/building/2.jpg",
+                itemImageSrc: "/building/2.jpg",
                 alt: "Description for Image 1",
                 title: "Title 1",
             },
             {
-                itemImageSrc: "/public/building/5.jpg",
+                itemImageSrc: "/building/5.jpg",
                 alt: "Description for Image 1",
                 title: "Title 1",
             },
