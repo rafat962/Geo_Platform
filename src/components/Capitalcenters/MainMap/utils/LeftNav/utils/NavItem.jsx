@@ -17,7 +17,7 @@ const NavItem = ({
         $(
             `#${
                 dir !== "left" && smallCase === true
-                    ? name.split(" ").join("-")
+                    ? name.split(" ").join("--")
                     : name.split(" ").join("")
             }`
         ).slideDown(400);
@@ -25,7 +25,7 @@ const NavItem = ({
         $(
             `#${
                 dir !== "left" && smallCase === true
-                    ? name.split(" ").join("-")
+                    ? name.split(" ").join("--")
                     : name.split(" ").join("")
             }`
         ).slideUp(400);
@@ -43,7 +43,7 @@ const NavItem = ({
             <div
                 id={
                     dir !== "left" && smallCase === true
-                        ? name.split(" ").join("-")
+                        ? name.split(" ").join("--")
                         : name.split(" ").join("")
                 }
                 className={`hidden ${dir == "left" || smallCase === true ? "left-[3rem]" : "right-[3rem]"}  absolute z-50 ${Vdir === "ver" ? "h-full w-72  top-0" : " w-[calc(100%-6rem)] h-[35rem] bottom-0"}  bg-white z-10 text-black overflow-hidden pb-8`}
