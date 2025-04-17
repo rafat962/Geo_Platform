@@ -13,21 +13,14 @@ const NavItem = ({
     Vdir = "ver",
     smallCase = false,
 }) => {
+    console.log(smallCase);
     if (state)
         $(
-            `#${
-                dir !== "left" && smallCase === true
-                    ? name.split(" ").join("--")
-                    : name.split(" ").join("")
-            }`
+            `#${smallCase ? name.split(" ").join("") + "SM" : name.split(" ").join("")}`
         ).slideDown(400);
     if (!state)
         $(
-            `#${
-                dir !== "left" && smallCase === true
-                    ? name.split(" ").join("--")
-                    : name.split(" ").join("")
-            }`
+            `#${smallCase ? name.split(" ").join("") + "SM" : name.split(" ").join("")}`
         ).slideUp(400);
     return (
         <>
@@ -42,11 +35,11 @@ const NavItem = ({
             {/* Items Content */}
             <div
                 id={
-                    dir !== "left" && smallCase === true
-                        ? name.split(" ").join("--")
+                    smallCase
+                        ? name.split(" ").join("") + "SM"
                         : name.split(" ").join("")
                 }
-                className={`hidden ${dir == "left" || smallCase === true ? "left-[3rem]" : "right-[3rem]"}  absolute z-50 ${Vdir === "ver" ? "h-full w-72  top-0" : " w-[calc(100%-6rem)] h-[35rem] bottom-0"}  bg-white z-10 text-black overflow-hidden pb-8`}
+                className={`hidden ${dir == "left" || smallCase ? "left-[3rem]" : "right-[3rem]"}  absolute z-50 ${Vdir === "ver" ? "h-full w-72  top-0" : " w-[calc(100%-6rem)] h-[35rem] bottom-0"}  bg-white z-10 text-black overflow-hidden pb-8`}
             >
                 {/* header */}
                 <div className="w-full bg-white p-3 border-b-2 border-b-gray-200 flex items-center justify-between">
