@@ -43,13 +43,11 @@ const CapitalLayout = () => {
                 setTitle("منطقة العاصمة");
         }
     }, [location.pathname]); // Depend on location.pathname to run the effect when the route changes
-
     return (
         // main container
-
-        <Body className="relative w-full h-fit flex flex-col items-start justify-start pt-3 px-8 space-y-5 overflow-auto ">
+        <Body className="relative w-full h-fit flex flex-col items-start justify-start pt-1 md:pt-3 p-0.5 md:px-8 space-y-5 overflow-auto ">
             {/* Breadcrumb  */}
-            <div className="">
+            <div className="mx-auto md:mx-0">
                 <Breadcrumb />
             </div>
             {/* main card */}
@@ -60,14 +58,14 @@ const CapitalLayout = () => {
                 className="bg-white dark:bg-slate-900  w-full h-full rounded-md drop-shadow-lg outline-2 outline-thr my-2 mb-4"
             >
                 {/* header */}
-                <div className=" w-full py-4  flex items-center justify-end">
+                <div className="w-full py-3 md:py-4  flex items-center justify-end">
                     {/* headName */}
-                    <div className=" select-none group flex border-r-3 border-r-indigo-800 items-center justify-center pl-10 px-8 p-2 rounded-l-full  bg-sec dark:bg-slate-700 text-lg font-semibold tracking-wider w-58 ">
+                    <div className=" select-none group flex border-r-3 border-r-indigo-800 items-center justify-center pl-10 px-8 p-2 rounded-l-full  bg-sec dark:bg-slate-700 text-lg font-semibold tracking-wider w-46 md:w-58 ">
                         {title}
                     </div>
                 </div>
                 {/* body */}
-                <motion.div className="w-full h-full p-4">
+                <motion.div className="w-full h-full p-2 md:p-4">
                     <Outlet />
                 </motion.div>
             </motion.div>

@@ -85,9 +85,9 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                     {/* Body */}
                     {/* main info */}
                     <div className="flex flex-col items-center justify-center space-y-2">
-                        <div className=" w-full py-2  flex items-center justify-center">
+                        <div className="w-full py-2  flex items-center justify-center">
                             {/* headName */}
-                            <div className=" select-none group flex  items-center justify-center px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
+                            <div className=" select-none group flex  items-center justify-center  px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
                                 معلومات الموقع والهوية الجغرافية
                             </div>
                         </div>
@@ -167,7 +167,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                     <div className="flex flex-col items-center justify-center space-y-2">
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
-                            <div className=" select-none group flex  items-center justify-center px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
+                            <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
                                 معلومات المبنى الفنية والإدارية
                             </div>
                         </div>
@@ -243,7 +243,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                     <div className="flex flex-col items-center justify-center space-y-2">
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
-                            <div className=" select-none group flex  items-center justify-center px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
+                            <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
                                 بيانات مرجعية وتوثيقية
                             </div>
                         </div>
@@ -311,7 +311,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                     <div className="flex flex-col items-center justify-center space-y-2">
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
-                            <div className=" select-none group flex  items-center justify-center px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
+                            <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
                                 صور المبنى
                             </div>
                         </div>

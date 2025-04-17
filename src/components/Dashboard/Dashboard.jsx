@@ -11,7 +11,7 @@ const Dashboard = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="w-full h-fit  p-2"
+            className="w-full h-fit  p-0.5 md:p-2"
         >
             <div className="flex flex-col items-start justify-start ">
                 {/* first Row Taps */}

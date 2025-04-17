@@ -17,6 +17,7 @@ import LegendContent from "./utils/sideContent/LegendContent";
 import BookMarkContent from "./utils/sideContent/BookMarkContent";
 import ShareDialog from "./utils/sideContent/ShareDialog";
 import Expand from "../../../../../shared/ui/header/utils/Expand";
+import RightNav from "../RightNav/RightNav";
 const LeftNav = () => {
     const { dispatch, state } = useNavContext();
     const { layers, BaseMap, legend, bookMark } = state;
@@ -80,6 +81,10 @@ const LeftNav = () => {
                 />
                 {/* share Dialog */}
                 <ShareDialog open={open} handleClose={handleClose} />
+                {/* righ nav in small screen */}
+                <div className="md:hidden">
+                    <RightNav smallCase={true} />
+                </div>
             </ul>
             {/* bottom */}
             <ul className="w-full  flex flex-col items-center justify-start  pb-2">

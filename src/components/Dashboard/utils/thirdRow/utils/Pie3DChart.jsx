@@ -5,9 +5,9 @@ import { mobileOS } from "../../data/chartsData";
 const Pie3DChart = () => {
     const [hoveredItem, setHoveredItem] = useState(null);
     return (
-        <div className="flex flex-col w-full  flex-1/5 bg-white dark:bg-gray-900 dark:text-gray-200 h-full rounded-2xl drop-shadow-xl shadow-xl ring-1 ring-gray-300 p-4">
+        <div className="flex flex-col w-full  flex-1/5 bg-white dark:bg-gray-900 dark:text-gray-200 h-full rounded-2xl drop-shadow-xl shadow-xl ring-1 ring-gray-300 p-0.5 md:p-4">
             {/* Header */}
-            <div className="flex flex-col items-end justify-start gap-1">
+            <div className="flex flex-col items-end justify-start gap-1 px-2">
                 <h1 className="text-2xl font-bold tracking-wide">
                     جميع المبانى
                 </h1>
@@ -61,7 +61,7 @@ const Pie3DChart = () => {
                 </div>
             </div>
             {/* legend */}
-            <div className=" absolute bottom-0 left-0 m-auto  flex flex-col md:flex-row items-start md:items-center w-full justify-center px-4 space-x-2">
+            <div className=" hidden md:absolute bottom-0 left-0 m-auto  flex flex-col md:flex-row items-start md:items-center w-full justify-center px-4 space-x-2">
                 {/* key conteiner */}
                 <div className="flex flex-col items-center justify-center space-y-1">
                     <div className="flex items-center justify-center space-x-2">

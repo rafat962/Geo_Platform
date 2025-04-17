@@ -92,7 +92,7 @@ const AssetUpdate = memo(({ data, dispatch, view }) => {
             transition={{ duration: 0.5 }}
         >
             {/* header */}
-            <div className="w-full flex items-center justify-between px-2">
+            <div className="w-full flex items-center justify-between md:px-2">
                 {/* backButton */}
                 <span
                     onClick={handleBack}
@@ -111,7 +111,7 @@ const AssetUpdate = memo(({ data, dispatch, view }) => {
             {/* form */}
             <CacheProvider value={cacheRtl}>
                 <form
-                    className=" w-full h-fit grid grid-cols-2 gap-6 gap-y-7 p-4"
+                    className="w-full h-fit grid grid-cols-2 gap-2 md:gap-6 gap-y-7 py-3 md:p-4"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* All fields */}

@@ -42,7 +42,7 @@
         animation: spin-every-5s 10s ease-in-out infinite;
     }
     .dIRect {
-        @apply absolute w-37 h-37 rounded-4xl -left-5   rotate-40;
+        @apply absolute w-37 h-37 md:w-26 md:h-26 lg:w-37 lg:h-37 rounded-4xl -left-5  lg:-left-5 rotate-40;
     }
     .tap {
         @apply flex-1/2 sm:flex-1/3 md:flex-1/5 h-30 bg-white drop-shadow-lg  outline-2 outline-gray-200 rounded-xl overflow-hidden;

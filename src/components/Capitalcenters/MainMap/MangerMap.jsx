@@ -57,7 +57,7 @@ const Body = styled.div`
 `;
 const MangerMap = () => {
     return (
-        <Main>
+        <main className="grid [grid-template-columns:3rem_auto] md:[grid-template-columns:3rem_auto_3rem] h-screen w-screen overflow-hidden">
             <RightNavContext>
                 <NavContext>
                     {/* sidebar */}
@@ -69,12 +69,12 @@ const MangerMap = () => {
                         <MapMain />
                     </Body>
                     {/* Right sidebar */}
-                    <Sidebar className=" bg-slate-800 text-white">
+                    <Sidebar className=" bg-slate-800 text-white hidden md:flex">
                         <RightNav />
                     </Sidebar>
                 </NavContext>
             </RightNavContext>
-        </Main>
+        </main>
     );
 };
 

@@ -86,7 +86,7 @@ const AddCenter = () => {
                     <AddMap />
                 </div>
                 <form
-                    className=" w-full h-fit grid grid-cols-2 gap-6 gap-y-7 p-4"
+                    className=" w-full h-fit grid grid-cols-2 gap-2 md:gap-6 gap-y-7 py-3 md:p-4"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* All fields */}

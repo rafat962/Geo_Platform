@@ -23,7 +23,7 @@ const Bar3DChart = () => {
     }
     const { mode } = useGetDarkmode();
     return (
-        <div className="p-4 flex flex-col lg:flex-1/2 flex-1/5 bg-white dark:bg-gray-900 dark:text-gray-200 h-full rounded-2xl drop-shadow-xl shadow-xl ring-1 ring-gray-300">
+        <div className="p-1 md:p-4 flex flex-col lg:flex-1/2 flex-1/5 bg-white dark:bg-gray-900 dark:text-gray-200 h-full rounded-2xl drop-shadow-xl shadow-xl ring-1 ring-gray-300">
             {/* top head */}
             <div className="flex items-center w-full justify-between">
                 {/* select */}
@@ -49,18 +49,18 @@ const Bar3DChart = () => {
                         <MenuItem value={2024}>2024</MenuItem>
                     </Select>
                 </FormControl>
-                <div className="flex flex-col items-end justify-start space-y-2">
-                    <h1 className="text-2xl font-bold">
+                <div className="text-end flex flex-col items-end justify-start space-y-2">
+                    <h1 className=" text-xl md:text-2xl font-bold">
                         توزيع حالة المباني خلال العام
                     </h1>
-                    <p className="font-semibold text-gray-600">
+                    <p className=" text-sm md:text-base font-semibold text-gray-600">
                         مقارنة بين المباني القائمة وتحت الإنشاء والمباني
                         المهجورة
                     </p>
                 </div>
             </div>
             {/* legend */}
-            <div className="flex items-center w-full justify-start px-4 space-x-6">
+            <div className="flex items-center w-full justify-center md:justify-start px-4 space-x-6">
                 {/* key conteiner */}
                 <div className="flex flex-col items-center justify-center space-y-2">
                     <div className="flex items-center justify-center space-x-2">

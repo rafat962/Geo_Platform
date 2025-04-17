@@ -19,7 +19,7 @@ import RoutingContent from "./content/Routing/RoutingContent";
 import AttributeTableContent from "./content/AttributeTable/AttributeTableContent";
 import ToolsContent from "./content/Tools/ToolsContent";
 import PrintContent from "./content/print/PrintContent";
-const RightNav = () => {
+const RightNav = ({ smallCase = false }) => {
     const { dispatch, state } = useRightNavContext();
     const {
         AttributeQuery,
@@ -30,7 +30,6 @@ const RightNav = () => {
         attribute,
         Print,
         Tools,
-        MeasureDistance,
     } = state;
     // menu Logic
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,6 +48,7 @@ const RightNav = () => {
             <ul className="w-full h-full flex flex-col items-center justify-start  py-2">
                 {/* Query By Attributes */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Query By Attributes"
                     icon={<BiTable />}
                     onClick={() => dispatch({ type: "AttributeQuery" })}
@@ -59,6 +59,7 @@ const RightNav = () => {
                 />
                 {/* Lable */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Lable"
                     icon={<HiOutlineAtSymbol />}
                     onClick={() => dispatch({ type: "lable" })}
@@ -69,6 +70,7 @@ const RightNav = () => {
                 />
                 {/* Edit */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Edit"
                     icon={<BiEditAlt />}
                     onClick={() => dispatch({ type: "Edit" })}
@@ -79,6 +81,7 @@ const RightNav = () => {
                 />
                 {/* Buffer */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Buffer"
                     icon={<HiMiniCubeTransparent />}
                     onClick={() => dispatch({ type: "Buffer" })}
@@ -89,6 +92,7 @@ const RightNav = () => {
                 />
                 {/* Routing */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Routing"
                     icon={<HiMiniArrowUturnUp />}
                     onClick={() => dispatch({ type: "Routing" })}
@@ -99,6 +103,7 @@ const RightNav = () => {
                 />
                 {/* attribute */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Attribute Table"
                     icon={<HiMiniTableCells />}
                     onClick={() => dispatch({ type: "attribute" })}
@@ -123,6 +128,7 @@ const RightNav = () => {
                 </Tooltip>
                 {/* Print */}
                 <NavItem
+                    smallCase={smallCase}
                     name="Print"
                     icon={<HiPrinter />}
                     onClick={() => dispatch({ type: "Print" })}
