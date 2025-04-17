@@ -59,7 +59,7 @@ const RightNav = ({ smallCase = false }) => {
                 />
                 {/* Lable */}
                 <NavItem
-                    smallCase={true}
+                    smallCase={false}
                     name="Lable"
                     icon={<HiOutlineAtSymbol />}
                     onClick={() => dispatch({ type: "lable" })}
