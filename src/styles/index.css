@@ -55,7 +55,11 @@
         scrollbar-width: none; /* Firefox */
     }
 }
-
+@theme inline {
+    --shadow-input: 0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+        0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+        0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+}
 @theme {
     /* colors */
     --color-prim: #fffdf0;
@@ -66,6 +70,6 @@
     /* fonts */
     --font-sans: "Cairo";
     --font-sec: "Noto Kufi Arabic", sans-serif;
-    --font-thr: "Poppins", sans-serif;
-    --font-for: "IBM Plex Sans", sans-serif;
+    --font-thr: "Amiri", sans-serif;
+    --font-for: "Lateef", sans-serif;
 }

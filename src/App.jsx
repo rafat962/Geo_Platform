@@ -21,46 +21,51 @@ import { useGetDarkmode } from "./shared/hooks/useGetDarkmode";
 import { useEffect, useMemo } from "react";
 import MangerMap from "./components/Capitalcenters/MainMap/MangerMap";
 import getToken from "./shared/helpers/GetToken";
+import authRoutes from "./components/Auth/auth.route";
+import ProtectedRouts from "./components/Auth/gurd/Protected.Routs";
+import settingsRoutes from "./components/Settings/settings.routing";
+
 const AppContainer = styled.div`
     box-sizing: border-box;
     padding: 0px;
     margin: 0px;
 `;
 const routs = createBrowserRouter([
+    ...authRoutes,
     {
-        path: "/",
-        element: (
-            <AppContainer>
-                <AppLayout />
-            </AppContainer>
-        ),
+        element: <ProtectedRouts />,
         children: [
             {
-                index: true,
-                element: <Navigate to="/dashboard" replace />,
-            },
-            {
-                path: "/CapitalCenter",
+                path: "/",
                 element: (
-                    <AssetsContext>
-                        <CapitalLayout />
-                    </AssetsContext>
+                    <AppContainer>
+                        <AppLayout />
+                    </AppContainer>
                 ),
                 children: [
-                    { path: "AllCenters", element: <AllCenters /> },
-                    { path: "AddCenter", element: <AddCenter /> },
+                    {
+                        path: "/CapitalCenter",
+                        element: (
+                            <AssetsContext>
+                                <CapitalLayout />
+                            </AssetsContext>
+                        ),
+                        children: [
+                            { path: "AllCenters", element: <AllCenters /> },
+                            { path: "AddCenter", element: <AddCenter /> },
+                        ],
+                    },
+                    { path: "/dashboard", element: <Dashboard /> },
+                    { path: "/InvestmentReq", element: <InvestmentReq /> },
+                    { path: "/LandUses", element: <LandUses /> },
+                    { path: "/Landmark", element: <LandMark /> },
+                    ...settingsRoutes,
+                    { path: "/LogOut", element: <LogOut /> },
                 ],
             },
-
-            { path: "/dashboard", element: <Dashboard /> },
-            { path: "/InvestmentReq", element: <InvestmentReq /> },
-            { path: "/LandUses", element: <LandUses /> },
-            { path: "/Landmark", element: <LandMark /> },
-            { path: "/Settings", element: <Settings /> },
-            { path: "/LogOut", element: <LogOut /> },
+            { path: "/MainMap", element: <MangerMap /> },
         ],
     },
-    { path: "/MainMap", element: <MangerMap /> },
 ]);
 
 function App() {

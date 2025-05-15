@@ -1,10 +1,12 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from "react";
 import {
     BiBookBookmark,
     BiCog,
     BiGridAlt,
     BiInfoCircle,
     BiLayer,
+    BiLayerPlus,
     BiListUl,
     BiShareAlt,
 } from "react-icons/bi";
@@ -18,12 +20,12 @@ import BookMarkContent from "./utils/sideContent/BookMarkContent";
 import ShareDialog from "./utils/sideContent/ShareDialog";
 import Expand from "../../../../../shared/ui/header/utils/Expand";
 import RightNav from "../RightNav/RightNav";
+import AddLayersContent from "./utils/sideContent/AddLayersContent";
 const LeftNav = () => {
     const { dispatch, state } = useNavContext();
-    const { layers, BaseMap, legend, bookMark } = state;
+    const { layers, BaseMap, legend, bookMark, addLayer } = state;
     // ---- dialog
     const [open, setOpen] = React.useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -36,6 +38,15 @@ const LeftNav = () => {
         <div className="w-full h-full flex flex-col items-center justify-between">
             {/* main container */}
             <ul className="w-full h-full flex flex-col items-center justify-start  py-2">
+                {/* Add Layers */}
+                <NavItem
+                    name="Add Layers"
+                    icon={<BiLayerPlus />}
+                    onClick={() => dispatch({ type: "addLayer" })}
+                    state={addLayer}
+                    content={<AddLayersContent />}
+                    dispatch={dispatch}
+                />
                 {/* Layers */}
                 <NavItem
                     name="Layers"

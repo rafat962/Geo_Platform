@@ -1,12 +1,9 @@
 import { BiLandscape, BiLayer } from "react-icons/bi";
 import {
     HiAdjustmentsVertical,
-    HiArchiveBoxArrowDown,
-    HiMap,
     HiMiniArrowRightStartOnRectangle,
     HiOutlineChartPie,
     HiOutlineCommandLine,
-    HiOutlineTableCells,
 } from "react-icons/hi2";
 import ListContainer from "./utils/ListContainer";
 import Avatar from "@mui/material/Avatar";
@@ -14,8 +11,18 @@ import { useSideBar } from "./context/SideContext";
 import ToggleList from "./utils/ToggleList";
 import { HiOutlineChartSquareBar } from "react-icons/hi";
 import ListItem from "./utils/ListItem";
+import AlertDialog from "../AlertDialog";
+import { useQuery } from "@tanstack/react-query";
+import { backendImagesUrl } from "../../../environment/devolpmentApi";
 
 const SideBar = () => {
+    const { data: userData } = useQuery({
+        queryKey: ["userData"],
+        queryFn: () => Promise.resolve(), // dummy fetcher
+        enabled: false, // won't actually call the fetcher
+    });
+    const userName = userData?.name;
+    const photo = `${backendImagesUrl}/users/${userData?.photo}`;
     // open Toggle
     const { dispatch, state } = useSideBar();
     const { wekala, gov, investmentAssets, govAssets, NavWidth, openNav } =
@@ -51,14 +58,14 @@ const SideBar = () => {
                 <div className="flex flex-col items-center justify-center mb-5 space-y-2 tracking-wider  w-full">
                     {/* lgCase */}
                     <Avatar
-                        src="/users/profile.png"
+                        src={photo ? photo : "/users/profile.png"}
                         sx={{ width: 58, height: 58 }}
                         className={` ${
                             openNav ? "scale-100" : "scale-75"
                         } w-[56px] h-[56px]`}
                     ></Avatar>
                     {/* smCase */}
-                    {openNav && <p className={` text-lg`}>رافت كامل محمد</p>}
+                    {openNav && <p className={` text-lg`}>{userName || ""}</p>}
                     <div className="w-full h-[1px] bg-gray-700 mt-2"></div>
                 </div>
                 <ListItem
@@ -183,17 +190,22 @@ const SideBar = () => {
                 />
             </ListContainer>
             <ListContainer>
-                <ListItem
-                    toUrl="/Settings"
-                    openNav={openNav}
-                    name="الإعدادات"
-                    icon={<HiAdjustmentsVertical />}
-                />
-                <ListItem
-                    toUrl="/LogOut"
-                    openNav={openNav}
-                    name="تسجيل الخروج"
-                    icon={<HiMiniArrowRightStartOnRectangle />}
+                {
+                    <ListItem
+                        toUrl="/settings"
+                        openNav={openNav}
+                        name="الإعدادات"
+                        icon={<HiAdjustmentsVertical />}
+                    />
+                }
+                <AlertDialog
+                    content={
+                        <ListItem
+                            openNav={openNav}
+                            name="تسجيل الخروج"
+                            icon={<HiMiniArrowRightStartOnRectangle />}
+                        />
+                    }
                 />
             </ListContainer>
         </div>

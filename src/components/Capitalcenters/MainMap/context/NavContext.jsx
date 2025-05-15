@@ -6,8 +6,10 @@ const initState = {
     BaseMap: false,
     legend: false,
     bookMark: false,
+    addLayer: false,
     view: "",
     viewRef: "",
+    selectedLayer: "",
 };
 
 function setAllFalse() {
@@ -21,12 +23,21 @@ function setAllFalse() {
 function reducer(state, action) {
     let ResetStet = setAllFalse();
     switch (action.type) {
+        case "addLayer":
+            return {
+                ResetStet,
+                addLayer: !state.addLayer,
+                view: state.view,
+                viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
+            };
         case "layers":
             return {
                 ResetStet,
                 layers: !state.layers,
                 view: state.view,
                 viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
             };
         case "BaseMap":
             return {
@@ -34,6 +45,7 @@ function reducer(state, action) {
                 BaseMap: !state.BaseMap,
                 view: state.view,
                 viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
             };
         case "legend":
             return {
@@ -41,6 +53,7 @@ function reducer(state, action) {
                 legend: !state.legend,
                 view: state.view,
                 viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
             };
         case "bookMark":
             return {
@@ -48,18 +61,25 @@ function reducer(state, action) {
                 bookMark: !state.bookMark,
                 view: state.view,
                 viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
             };
         case "reset":
             return {
                 ResetStet,
                 view: state.view,
                 viewRef: state.viewRef,
+                selectedLayer: state.selectedLayer,
             };
         case "view":
             return {
                 ...state,
                 view: action.payload.view,
                 viewRef: action.payload.viewRef,
+            };
+        case "selectLayer":
+            return {
+                ...state,
+                selectedLayer: action.payload.selectedLayer,
             };
         default:
             return new Error("Invalid action");

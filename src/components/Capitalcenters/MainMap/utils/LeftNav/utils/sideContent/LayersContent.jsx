@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import LayerList from "@arcgis/core/widgets/LayerList";
 import { useNavContext } from "../../../../context/NavContext";
+import toast from "react-hot-toast";
 const LayersContent = () => {
     const LayerContainer = useRef();
-    const { state } = useNavContext();
+    const { state, dispatch } = useNavContext();
     const { view } = state;
     useEffect(() => {
         if (!view || !LayerContainer.current) return;
@@ -22,6 +23,11 @@ const LayersContent = () => {
                 item.actionsSections = [
                     [
                         {
+                            title: "Select",
+                            className: "esri-icon-checkbox-checked",
+                            id: "Select",
+                        },
+                        {
                             title: "Zoom to Layer",
                             className: "esri-icon-zoom-in-magnifying-glass",
                             id: "zoom-to-layer",
@@ -37,11 +43,6 @@ const LayersContent = () => {
                             id: "decrease-opacity",
                         },
                         {
-                            title: "Export Features to CSV",
-                            className: "esri-icon-download",
-                            id: "export-csv",
-                        },
-                        {
                             title: "Move Layer Up",
                             className: "esri-icon-arrow-up",
                             id: "move-layer-up",
@@ -51,6 +52,12 @@ const LayersContent = () => {
                             className: "esri-icon-arrow-down",
                             id: "move-layer-down",
                         },
+
+                        {
+                            title: "Remove Layer",
+                            className: "esri-icon-trash",
+                            id: "Remove",
+                        },
                     ],
                 ];
             },
@@ -59,6 +66,9 @@ const LayersContent = () => {
         LayersWidget.on("trigger-action", (event) => {
             const layer = event.item.layer;
             switch (event.action.id) {
+                case "Select":
+                    selectLayer(layer);
+                    break;
                 case "zoom-to-layer":
                     if (layer.fullExtent) {
                         view.goTo(layer.fullExtent);
@@ -75,6 +85,9 @@ const LayersContent = () => {
                     break;
                 case "move-layer-down":
                     moveLayerDown(layer);
+                    break;
+                case "Remove":
+                    removeLayer(layer);
                     break;
                 default:
                     break;
@@ -93,6 +106,17 @@ const LayersContent = () => {
             if (index < view.map.layers.length - 1) {
                 view.map.reorder(layer, index + 1);
             }
+        };
+        const selectLayer = (layer) => {
+            dispatch({
+                type: "selectLayer",
+                payload: { selectedLayer: layer },
+            });
+            toast.success(`Layer ${layer.title} has been Selected.`);
+        };
+        const removeLayer = (layer) => {
+            view?.map.remove(layer);
+            toast.success(`Layer ${layer.title} has been removed.`);
         };
         return () => {
             if (LayerContainer.current) {

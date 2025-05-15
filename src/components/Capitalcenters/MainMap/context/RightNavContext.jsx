@@ -14,6 +14,7 @@ const initState = {
     MeasureArea: false,
     search: false,
     location: false,
+    queryBot: false,
 };
 
 function setAllFalse() {
@@ -60,6 +61,11 @@ function reducer(state, action) {
             return {
                 ...ResetStet,
                 Print: !state.Print,
+            };
+        case "queryBot":
+            return {
+                ...ResetStet,
+                queryBot: !state.queryBot,
             };
         case "Tools":
             return {

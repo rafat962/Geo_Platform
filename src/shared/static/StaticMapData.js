@@ -7,6 +7,9 @@ const layer = new FeatureLayer({
     outFields: ["*"], // Ensure all fields are available
 });
 
+const layerUrl =
+    "https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1/FeatureServer";
+
 const center = [43, 18.5];
 const zoom = 6;
 
@@ -45,4 +48,10 @@ const applyLabelingInfo = (fieldInput) => {
         });
 };
 
-export { layer as PointsLayerService, center, zoom, applyLabelingInfo };
+export {
+    layer as PointsLayerService,
+    center,
+    zoom,
+    applyLabelingInfo,
+    layerUrl,
+};
