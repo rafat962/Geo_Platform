@@ -55,7 +55,7 @@ const LogIn = () => {
                     </h2>
                     <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
                         Login to Geo-Platform if you can because we don&apos;t
-                        have a login flow yet
+                        have a login flow yet.
                     </p>
                     <form className="my-8" onSubmit={handleSubmit(onSucses)}>
                         <LabelInputContainer className="mb-4 relative">
