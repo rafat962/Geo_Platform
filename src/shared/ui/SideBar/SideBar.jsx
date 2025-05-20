@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { BiLandscape, BiLayer } from "react-icons/bi";
 import {
     HiAdjustmentsVertical,
@@ -14,8 +15,13 @@ import ListItem from "./utils/ListItem";
 import AlertDialog from "../AlertDialog";
 import { useQuery } from "@tanstack/react-query";
 import { backendImagesUrl } from "../../../environment/devolpmentApi";
-
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 const SideBar = () => {
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     const { data: userData } = useQuery({
         queryKey: ["userData"],
         queryFn: () => Promise.resolve(), // dummy fetcher
@@ -36,15 +42,15 @@ const SideBar = () => {
     };
     return (
         <div
-            className={`${NavWidth} "dark:bg-slate-950 transition-all ease-in-out duration-400 text-nowrap h-full p-1 py-3 pb-6 flex flex-col justify-between  border-l-[1px] border-l-gray-500 `}
+            className={`${NavWidth} dark:bg-slate-950 transition-all ease-in-out duration-400 text-nowrap h-full p-1 py-3 pb-6 flex flex-col justify-between border-l-[1px] border-l-gray-500`}
         >
             <Avatar
                 onClick={handleToggleNav}
                 className={`${
                     openNav
-                        ? "right-50 hover:translate-x-1"
-                        : "right-10 scale-90 hover:-translate-x-1 rotate-180"
-                }  top-30 z-10 cursor-pointer  hover:scale-105 transition-all ease-in-out duration-400 animate-spin-every-5s`}
+                        ? `${isRTL ? "right-50 hover:translate-x-1" : "left-50 hover:translate-x-1 rotate-180"} `
+                        : `${isRTL ? "right-10 scale-90 hover:-translate-x-1 rotate-180" : "left-10 scale-90 hover:-translate-x-1 "} `
+                } top-30 z-10 cursor-pointer hover:scale-105 transition-all ease-in-out duration-400 animate-spin-every-5s`}
                 src="/next.png"
                 sx={{
                     width: 22,
@@ -52,157 +58,150 @@ const SideBar = () => {
                     position: "absolute",
                     bgcolor: "white",
                 }}
-            ></Avatar>
+            />
             <ListContainer>
                 {/* avatar */}
-                <div className="flex flex-col items-center justify-center mb-5 space-y-2 tracking-wider  w-full">
-                    {/* lgCase */}
+                <div className="flex flex-col items-center justify-center mb-5 space-y-2 tracking-wider w-full">
                     <Avatar
                         src={photo ? photo : "/users/profile.png"}
                         sx={{ width: 58, height: 58 }}
-                        className={` ${
-                            openNav ? "scale-100" : "scale-75"
-                        } w-[56px] h-[56px]`}
-                    ></Avatar>
-                    {/* smCase */}
-                    {openNav && <p className={` text-lg`}>{userName || ""}</p>}
+                        className={` ${openNav ? "scale-100" : "scale-75"} w-[56px] h-[56px]`}
+                    />
+                    {openNav && <p className="text-lg">{userName || ""}</p>}
                     <div className="w-full h-[1px] bg-gray-700 mt-2"></div>
                 </div>
                 <ListItem
                     toUrl="/dashboard"
                     openNav={openNav}
-                    name="الرئيسية"
+                    name={t("الرئيسية")}
                     icon={<HiOutlineChartSquareBar />}
                 />
                 <ListItem
                     target="_blank"
                     toUrl="/MainMap"
                     openNav={openNav}
-                    name="خريطة المعلومات"
+                    name={t("خريطة المعلومات")}
                     icon={<HiOutlineCommandLine />}
                 />
-                {/* main toggle */}
+
                 <ToggleList openNav={openNav}>
-                    {/* header */}
                     <ToggleList.Header
                         open={wekala}
                         icon={<BiLayer className="text-xl" />}
-                        headName="منطقة العاصمة"
+                        headName={t("منطقة العاصمة")}
                         handleClick={() => handleClick("wekala")}
                     />
                     <ToggleList.Body open={wekala}>
                         <ToggleList.SubHeader
                             open={investmentAssets}
                             handleClick={() => handleClick("investmentAssets")}
-                            headName="المراكز الإدارية"
+                            headName={t("المراكز الإدارية")}
                         />
                         <ToggleList.Body type="other" open={investmentAssets}>
                             <ToggleList.Item
                                 disable={false}
                                 url="/CapitalCenter/AllCenters"
                                 type="other"
-                                name="عرض المراكز"
-                            ></ToggleList.Item>
+                                name={t("عرض المراكز")}
+                            />
                             <ToggleList.Item
                                 disable={false}
                                 url="/CapitalCenter/AddCenter"
                                 type="other"
-                                name="إضافة مركز"
-                            ></ToggleList.Item>
+                                name={t("إضافة مركز")}
+                            />
                         </ToggleList.Body>
                         <ToggleList.Item
                             url="/other"
-                            name="طلبات المنطقة"
-                        ></ToggleList.Item>
+                            name={t("طلبات المنطقة")}
+                        />
                         <ToggleList.Item
                             url="/other"
-                            name="الخريطة الجغرافية"
-                        ></ToggleList.Item>
+                            name={t("الخريطة الجغرافية")}
+                        />
                         <ToggleList.Item
                             url="/other"
-                            name="متابعة ميدانية للمنطقة"
-                        ></ToggleList.Item>
+                            name={t("متابعة ميدانية للمنطقة")}
+                        />
                         <ToggleList.Item
                             url="/other"
-                            name="الفرص في المنطقة"
-                        ></ToggleList.Item>
+                            name={t("الفرص في المنطقة")}
+                        />
                         <ToggleList.Item
                             url="/other"
-                            name="الإشعارات الجغرافية"
-                        ></ToggleList.Item>
+                            name={t("الإشعارات الجغرافية")}
+                        />
                         <ToggleList.Item
                             url="/other"
-                            name="تقارير المنطقة"
-                        ></ToggleList.Item>
+                            name={t("تقارير المنطقة")}
+                        />
                     </ToggleList.Body>
 
-                    {/* المحافظات */}
                     <ToggleList.Header
                         open={gov}
                         icon={<BiLayer className="text-xl" />}
-                        headName="منطقة الشمال"
+                        headName={t("منطقة الشمال")}
                         handleClick={() => handleClick("gov")}
                     />
                     <ToggleList.Body open={gov}>
                         <ToggleList.SubHeader
                             open={govAssets}
                             handleClick={() => handleClick("govAssets")}
-                            headName="القرى التابعة"
+                            headName={t("القرى التابعة")}
                         />
                         <ToggleList.Body type="other" open={govAssets}>
                             <ToggleList.Item
                                 type="other"
-                                name="عرض القرى"
-                            ></ToggleList.Item>
+                                name={t("عرض القرى")}
+                            />
                             <ToggleList.Item
                                 type="other"
-                                name="إضافة قرية"
-                            ></ToggleList.Item>
+                                name={t("إضافة قرية")}
+                            />
                             <ToggleList.Item
                                 type="other"
-                                name="تحديث حالة القرية"
-                            ></ToggleList.Item>
+                                name={t("تحديث حالة القرية")}
+                            />
                             <ToggleList.Item
                                 type="other"
-                                name="تقرير القرى"
-                            ></ToggleList.Item>
+                                name={t("تقرير القرى")}
+                            />
                         </ToggleList.Body>
-                        <ToggleList.Item name="طلبات القرى"></ToggleList.Item>
-                        <ToggleList.Item name="الخريطة الجغرافية"></ToggleList.Item>
-                        <ToggleList.Item name="متابعة ميدانية"></ToggleList.Item>
-                        <ToggleList.Item name="الفرص في القرى"></ToggleList.Item>
-                        <ToggleList.Item name="إشعارات القرى"></ToggleList.Item>
-                        <ToggleList.Item name="تقارير تفصيلية"></ToggleList.Item>
+                        <ToggleList.Item name={t("طلبات القرى")} />
+                        <ToggleList.Item name={t("الخريطة الجغرافية")} />
+                        <ToggleList.Item name={t("متابعة ميدانية")} />
+                        <ToggleList.Item name={t("الفرص في القرى")} />
+                        <ToggleList.Item name={t("إشعارات القرى")} />
+                        <ToggleList.Item name={t("تقارير تفصيلية")} />
                     </ToggleList.Body>
                 </ToggleList>
 
                 <ListItem
                     toUrl="/LandUses"
                     openNav={openNav}
-                    name="إستعمالات الأراضى"
+                    name={t("إستعمالات الأراضى")}
                     icon={<HiOutlineChartPie />}
                 />
                 <ListItem
                     toUrl="/Landmark"
                     openNav={openNav}
-                    name="العلامات المميزة"
+                    name={t("العلامات المميزة")}
                     icon={<BiLandscape />}
                 />
             </ListContainer>
+
             <ListContainer>
-                {
-                    <ListItem
-                        toUrl="/settings"
-                        openNav={openNav}
-                        name="الإعدادات"
-                        icon={<HiAdjustmentsVertical />}
-                    />
-                }
+                <ListItem
+                    toUrl="/settings/email"
+                    openNav={openNav}
+                    name={t("الإعدادات")}
+                    icon={<HiAdjustmentsVertical />}
+                />
                 <AlertDialog
                     content={
                         <ListItem
                             openNav={openNav}
-                            name="تسجيل الخروج"
+                            name={t("تسجيل الخروج")}
                             icon={<HiMiniArrowRightStartOnRectangle />}
                         />
                     }

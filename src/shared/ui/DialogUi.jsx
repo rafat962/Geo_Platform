@@ -8,7 +8,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-export default function AlertDialog({ content }) {
+import { useQueryClient } from "@tanstack/react-query";
+export default function DialogUi({
+    content,
+    action,
+    actionName,
+    successMessage,
+    handleCloseMenu,
+    message,
+}) {
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
@@ -17,12 +25,18 @@ export default function AlertDialog({ content }) {
 
     const handleClose = () => {
         setOpen(false);
+        handleCloseMenu();
     };
-    const handleLogout = () => {
-        localStorage.removeItem("token");
+    const query = useQueryClient();
+    const handleAction = async () => {
+        const res = await action();
+        if (res.status === "success") {
+            toast.success(res.message);
+            query.invalidateQueries(["allUsersData"]);
+        } else {
+            toast.error("ERROR 404");
+        }
         setOpen(false);
-        toast.success("You have logged out successfully");
-        navigate("/");
     };
 
     return (
@@ -41,14 +55,13 @@ export default function AlertDialog({ content }) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="logout-dialog-description">
-                        Are you sure you want to log out? You will be safely
-                        signed out of your account.
+                        {message}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleLogout} autoFocus>
-                        Logout
+                    <Button onClick={handleClose}>رجوع</Button>
+                    <Button onClick={handleAction} autoFocus>
+                        {actionName}
                     </Button>
                 </DialogActions>
             </Dialog>

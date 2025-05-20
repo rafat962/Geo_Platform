@@ -71,6 +71,11 @@ const routs = createBrowserRouter([
 function App() {
     useEffect(() => {
         getToken();
+        // set langage
+        const curLan = JSON.parse(localStorage.getItem("lang"));
+        if (!curLan) {
+            localStorage.setItem("lang", JSON.stringify("ar"));
+        }
     }, []);
     const { mode } = useGetDarkmode();
     let currentMode = "dark";
@@ -84,6 +89,7 @@ function App() {
             }),
         [currentMode]
     );
+    // lan
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />

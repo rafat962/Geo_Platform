@@ -70,17 +70,21 @@ export function useActive() {
 // -------------------- verfyToken --------------------
 export function useVerfyToken() {
     const queryClient = useQueryClient();
-    const { mutate: verefytoken, isPending } = useMutation({
+    const {
+        mutate: verefytoken,
+        isPending,
+        data,
+        error,
+    } = useMutation({
         mutationFn: verfyUser,
         onError: (error, variables, context) => {
             // An error happened!
             toast.error(error?.message || "");
         },
         onSuccess: (data, variables, context) => {
-            console.log(data.data.userData);
-            queryClient.setQueryData(["userData"], data.data.userData);
+            queryClient.setQueryData(["userData"], data?.data?.userData);
             queryClient.setQueryData(["verifiedUser"], data.status);
         },
     });
-    return { isPending, verefytoken };
+    return { isPending, verefytoken, data, error };
 }

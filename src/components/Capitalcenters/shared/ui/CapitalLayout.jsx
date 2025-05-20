@@ -4,6 +4,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import Breadcrumb from "../../../../shared/ui/Breadcrumb ";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Body = styled.div`
     /* Hide scrollbar for WebKit (Chrome, Safari, Edge) */
@@ -29,18 +31,21 @@ const Body = styled.div`
 const CapitalLayout = () => {
     const [title, setTitle] = useState("");
     const location = useLocation();
-
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     useEffect(() => {
         const currentLocation = location.pathname.split("/")[2];
         switch (currentLocation) {
             case "AllCenters":
-                setTitle("كل الأصول");
+                setTitle(t("كل الأصول"));
                 break;
             case "AddCenter":
-                setTitle("إضافة أصل");
+                setTitle(t("إضافة أصل"));
                 break;
             default:
-                setTitle("منطقة العاصمة");
+                setTitle(t("منطقة العاصمة"));
         }
     }, [location.pathname]); // Depend on location.pathname to run the effect when the route changes
     return (
@@ -58,9 +63,13 @@ const CapitalLayout = () => {
                 className="bg-white dark:bg-slate-900  w-full h-full rounded-md drop-shadow-lg outline-2 outline-thr my-2 mb-4"
             >
                 {/* header */}
-                <div className="w-full py-3 md:py-4  flex items-center justify-end">
+                <div
+                    className={`w-full py-3 md:py-4  flex items-center ${isRTL ? "justify-end" : "justify-start"}`}
+                >
                     {/* headName */}
-                    <div className=" select-none group flex border-r-3 border-r-indigo-800 items-center justify-center pl-10 px-8 p-2 rounded-l-full  bg-sec dark:bg-slate-700 text-lg font-semibold tracking-wider w-46 md:w-58 ">
+                    <div
+                        className={`select-none group flex   items-center justify-center pl-10 px-8 p-2 ${isRTL ? "rounded-l-full border-r-indigo-800 border-r-3" : "rounded-r-full border-l-indigo-800 border-l-3"}  bg-sec dark:bg-slate-700 text-lg font-semibold tracking-wider w-46 md:w-58 `}
+                    >
                         {title}
                     </div>
                 </div>

@@ -10,6 +10,8 @@ import { HiArrowRightStartOnRectangle } from "react-icons/hi2";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+
 const LogIn = () => {
     const navigate = useNavigate();
     const {
@@ -37,6 +39,8 @@ const LogIn = () => {
             },
         });
     }
+    // lan
+    const { t } = useTranslation();
     return (
         // container
         <motion.div
@@ -47,7 +51,7 @@ const LogIn = () => {
             <div className="w-full h-screen  flex items-center justify-center">
                 <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl  md:p-8 dark:bg-black">
                     <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
-                        Welcome to Geo-Platform
+                        {t("Welcome to Geo-Platform")}
                     </h2>
                     <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
                         Login to Geo-Platform if you can because we don&apos;t

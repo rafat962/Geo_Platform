@@ -35,7 +35,6 @@ const BufferContent = () => {
             toast.error("يجب عليك إدخال المسافة");
             return;
         }
-        console.log(data);
         // ---------------- Buffer Logic  ----------------
         view?.map?.add(bufferGraphicsLayer); // Only add it once
         const query = PointsLayerService.createQuery();
@@ -71,7 +70,6 @@ const BufferContent = () => {
         });
     }
     function onError(error) {
-        console.log(error);
         if (error.distance && error.unit) {
             toast.error("يجب عليك إدخال الواحدة و المسافة");
         } else if (error.distance) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
@@ -12,7 +13,13 @@ import {
 import { BarChart } from "@mui/x-charts/BarChart";
 import styles from "./bar3DChart.module.css";
 import { useGetDarkmode } from "../../../../../shared/hooks/useGetDarkmode";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 const Bar3DChart = () => {
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     const [year, setYear] = useState(2024); // Initial selected year
     const [dataset, setDataset] = useState(dataset2024); // Initial selected year
     function handleChangeYear(year) {
@@ -25,7 +32,9 @@ const Bar3DChart = () => {
     return (
         <div className="p-1 md:p-4 flex flex-col lg:flex-1/2 flex-1/5 bg-white dark:bg-gray-900 dark:text-gray-200 h-full rounded-2xl drop-shadow-xl shadow-xl ring-1 ring-gray-300">
             {/* top head */}
-            <div className="flex items-center w-full justify-between">
+            <div
+                className={`flex ${isRTL ? "" : "flex-row-reverse"}  items-center w-full justify-between`}
+            >
                 {/* select */}
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel
@@ -34,7 +43,7 @@ const Bar3DChart = () => {
                         }
                         id="demo-controlled-open-select-label"
                     >
-                        Year
+                        {t("Year")}
                     </InputLabel>
                     <Select
                         className={mode ? styles.txtwhite : ""}
@@ -42,84 +51,80 @@ const Bar3DChart = () => {
                         onChange={(e) => handleChangeYear(e.target.value)}
                         labelId="demo-controlled-open-select-label"
                         id="demo-controlled-open-select"
-                        label="Year"
+                        label={t("Year")}
                     >
                         <MenuItem value={2022}>2022</MenuItem>
                         <MenuItem value={2023}>2023</MenuItem>
                         <MenuItem value={2024}>2024</MenuItem>
                     </Select>
                 </FormControl>
-                <div className="text-end flex flex-col items-end justify-start space-y-2">
+                <div
+                    className={`text-end flex flex-col  ${isRTL ? "items-end " : "items-start "} justify-start  space-y-2`}
+                >
                     <h1 className=" text-xl md:text-2xl font-bold">
-                        توزيع حالة المباني خلال العام
+                        {t("توزيع حالة المباني خلال العام")}
                     </h1>
                     <p className=" text-sm md:text-base font-semibold text-gray-600">
-                        مقارنة بين المباني القائمة وتحت الإنشاء والمباني
-                        المهجورة
+                        {t(
+                            "مقارنة بين المباني القائمة وتحت الإنشاء والمباني المهجورة"
+                        )}
                     </p>
                 </div>
             </div>
+
             {/* legend */}
             <div className="flex items-center w-full justify-center md:justify-start px-4 space-x-6">
-                {/* key conteiner */}
+                {/* key container */}
                 <div className="flex flex-col items-center justify-center space-y-2">
                     <div className="flex items-center justify-center space-x-2">
-                        {/* key */}
                         <div className="w-3 h-3 rounded-full bg-[#00a76f]"></div>
-                        {/* text */}
-                        <p className="text-sm font-semibold">قائم</p>
+                        <p className="text-sm font-semibold">{t("قائم")}</p>
                     </div>
-                    {/* building num */}
                     <p className="text-md font-bold text-[#00a76f]" dir="rtl">
-                        2000 مبنى
+                        2000 {t("مبنى")}
                     </p>
                 </div>
-                {/* key conteiner */}
+
                 <div className="flex flex-col items-center justify-center space-y-2">
                     <div className="flex items-center justify-center space-x-2">
-                        {/* key */}
                         <div className="w-3 h-3 rounded-full bg-[#ffab00]"></div>
-                        {/* text */}
-                        <p className="text-sm font-semibold">تحت الإنشاء</p>
+                        <p className="text-sm font-semibold">
+                            {t("تحت الإنشاء")}
+                        </p>
                     </div>
-                    {/* building num */}
                     <p className="text-md font-bold text-[#ce931d]" dir="rtl">
-                        3500 مبنى
+                        3500 {t("مبنى")}
                     </p>
                 </div>
-                {/* key conteiner */}
+
                 <div className="flex flex-col items-center justify-center space-y-2">
                     <div className="flex items-center justify-center space-x-2">
-                        {/* key */}
                         <div className="w-3 h-3 rounded-full bg-[#22c55e]"></div>
-                        {/* text */}
-                        <p className="text-sm font-semibold">مهجور</p>
+                        <p className="text-sm font-semibold">{t("مهجور")}</p>
                     </div>
-                    {/* building num */}
                     <p className="text-md font-bold text-[#22c55e]" dir="rtl">
-                        446 مبنى
+                        446 {t("مبنى")}
                     </p>
                 </div>
             </div>
+
             {/* bar chart */}
             <div className="flex-1/2 h-full ">
                 <BarChart
                     className={mode ? styles.txtwhite : ""}
                     height={300}
                     dataset={dataset}
-                    grid={{
-                        horizontal: true,
-                    }}
+                    grid={{ horizontal: true }}
                     sx={{
                         "& .MuiChartsGrid-line": {
                             stroke: "#ccc",
                             strokeDasharray: "4 4",
                         },
                         "& .MuiChartsAxis-tickLabel": {
-                            fill: mode === "dark" ? "#fff" : "#000", // لون النص في المحور
+                            fill: mode === "dark" ? "#fff" : "#000",
                         },
                         "& .MuiChartsAxis-line": {
-                            stroke: mode === "dark" ? "#aaa" : "#000", // لون خط المحور
+                            stroke: mode === "dark" ? "#aaa" : "#000",
                         },
                         margin: 0,
                         padding: 0,
@@ -127,21 +132,21 @@ const Bar3DChart = () => {
                     series={[
                         {
                             dataKey: "existing",
-                            label: "قائم",
+                            label: t("قائم"),
                             valueFormatter,
                             stack: "total",
                             color: "#00a76f",
                         },
                         {
                             dataKey: "underConstruction",
-                            label: "تحت الإنشاء",
+                            label: t("تحت الإنشاء"),
                             valueFormatter,
                             stack: "total",
                             color: "#ffab00",
                         },
                         {
                             dataKey: "abandoned",
-                            label: "مهجور",
+                            label: t("مهجور"),
                             valueFormatter,
                             stack: "total",
                             color: "#22c55e",

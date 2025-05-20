@@ -41,7 +41,6 @@ const applyLabelingInfo = (fieldInput) => {
             };
             // Apply the labeling info to the layer
             layer.labelingInfo = [labelClass];
-            console.log("Labeling info applied to the layer.");
         })
         .catch((err) => {
             console.error("Error loading layer:", err);

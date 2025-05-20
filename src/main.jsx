@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
+import "./i18n.js";
 const query = new QueryClient();
 
 createRoot(document.getElementById("root")).render(

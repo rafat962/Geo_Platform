@@ -1,4 +1,6 @@
 import Email from "./Email/Email";
+import ExistingEmail from "./ExistingEmail/ExistingEmail";
+import RequerstedEmails from "./RequerstedEmails/RequerstedEmails";
 import Settings from "./Settings";
 import { Navigate } from "react-router-dom";
 const settingsRoutes = [
@@ -9,6 +11,14 @@ const settingsRoutes = [
             {
                 path: "email",
                 element: <Email />,
+            },
+            {
+                path: "requestedEmails",
+                element: <RequerstedEmails />,
+            },
+            {
+                path: "existingEmails",
+                element: <ExistingEmail />,
             },
         ],
     },

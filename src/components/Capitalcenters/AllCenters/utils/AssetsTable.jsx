@@ -23,6 +23,8 @@ import { BiSearch } from "react-icons/bi";
 import useScrollToRecord from "../hooks/useScrollToRecord";
 import MenuToggle from "./MenuToggle";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 // --------------- header apper ---------------
 const headCells = [
     {
@@ -80,7 +82,9 @@ function getComparator(order, orderBy) {
 
 function EnhancedTableHead(props) {
     // get table data
-
+    // lan
+    const { t } = useTranslation();
+    // -----------
     const { order, orderBy, onRequestSort } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -100,7 +104,7 @@ function EnhancedTableHead(props) {
                             direction={orderBy === headCell.id ? order : "asc"}
                             onClick={createSortHandler(headCell.id)}
                         >
-                            {headCell.label}
+                            {t(headCell.label)}
                             {orderBy === headCell.id ? (
                                 <Box component="span" sx={visuallyHidden}>
                                     {order === "desc"
@@ -123,6 +127,9 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function AssetsTable({ view }) {
+    // lan
+    const { t } = useTranslation();
+    // -----------
     const { isLoading, buildingsData } = useTableData();
     const [rows, setRows] = React.useState([]);
     const [filterdRows, setFilterdRows] = React.useState([]);
@@ -215,7 +222,7 @@ export default function AssetsTable({ view }) {
                 <input
                     value={searchText}
                     onChange={(e) => handleSearch(e.target.value)}
-                    placeholder="البحث بواسطة مادة البناء"
+                    placeholder={`${t("البحث بواسطة مادة البناء")}`}
                     className="text-right p-2 w-full placeholder:text-right placeholder:pr-1 focus:outline-none"
                     type="text"
                 />

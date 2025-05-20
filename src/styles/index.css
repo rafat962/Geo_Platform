@@ -21,16 +21,16 @@
         @apply transition-all duration-200;
     }
     .listHorizntalLine {
-        @apply relative after:bg-gray-300 after:absolute after:w-[2px]  after:h-full after:-top-4 after:right-4;
+        @apply relative after:bg-gray-300 after:absolute after:w-[2px]  after:h-full after:-top-4;
     }
     .SublistHorizntalLine {
-        @apply relative after:bg-gray-200 after:absolute after:w-[2px]  after:h-full after:-top-4 after:right-15;
+        @apply relative after:bg-gray-200 after:absolute after:w-[2px]  after:h-full after:-top-4;
     }
     .listVerticalLine {
-        @apply before:absolute before:border-b-2 before:border-b-gray-300 before:w-4 before:h-5 before:top-1 before:right-4 before:rounded-r-3xl;
+        @apply before:absolute before:border-b-2 before:border-b-gray-300 before:w-4 before:h-5 before:top-1;
     }
     .SublistVerticalLine {
-        @apply before:absolute before:border-b-2 before:border-b-gray-300 before:w-4 before:h-5 before:top-1 before:right-15 before:rounded-r-3xl;
+        @apply before:absolute before:border-b-2 before:border-b-gray-300 before:w-4 before:h-5 before:top-1;
     }
     .mainListItem {
         @apply mr-10 flex items-center justify-end p-2 px-3 rounded-xl space-x-4 cursor-pointer dark:hover:bg-gray-700 hover:bg-gray-100 w-37;
@@ -42,10 +42,10 @@
         animation: spin-every-5s 10s ease-in-out infinite;
     }
     .dIRect {
-        @apply absolute w-37 h-37 md:w-26 md:h-26 lg:w-37 lg:h-37 rounded-4xl -left-5  lg:-left-5 rotate-40;
+        @apply absolute w-37 h-37 md:w-26 md:h-26 lg:w-37 lg:h-37 rounded-4xl    rotate-40;
     }
     .tap {
-        @apply flex-1/2 sm:flex-1/3 md:flex-1/5 h-30 bg-white drop-shadow-lg  outline-2 outline-gray-200 rounded-xl overflow-hidden;
+        @apply flex-1/2 sm:flex-1/3 md:flex-1/5  h-30 dark:bg-gray-800 bg-white drop-shadow-lg  outline-2 outline-gray-200 rounded-xl overflow-hidden;
     }
     .hide-scrollbar::-webkit-scrollbar {
         display: none;

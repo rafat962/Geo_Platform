@@ -6,19 +6,25 @@ import Collapse from "@mui/material/Collapse";
 import Tooltip from "@mui/material/Tooltip";
 import { useSideBar } from "../context/SideContext";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const ToggleContext = createContext();
 
 const ToggleList = ({ children, openNav }) => {
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     return (
-        <ToggleContext.Provider value={{ openNav }}>
+        <ToggleContext.Provider value={{ openNav, t, isRTL }}>
             <div className=" w-fit">{children}</div>
         </ToggleContext.Provider>
     );
 };
 
 const Header = ({ handleClick, headName, icon, open }) => {
-    const { openNav } = useContext(ToggleContext);
+    const { openNav, isRTL } = useContext(ToggleContext);
     const { dispatch } = useSideBar();
     const handleToggleNav = () => {
         dispatch({ type: "openNav" });
@@ -42,7 +48,7 @@ const Header = ({ handleClick, headName, icon, open }) => {
             <li
                 className={`${open && "bg-gray-200 dark:bg-gray-700"} ${
                     openNav
-                        ? "justify-between w-full pl-4"
+                        ? ` ${isRTL ? " pl-4" : "pr-5"} justify-between w-full `
                         : "justify-center w-fit "
                 }  z-10 flex items-center  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700  trans rounded-xl  my-1`}
             >
@@ -86,6 +92,7 @@ const Header = ({ handleClick, headName, icon, open }) => {
     );
 };
 const SubHeader = ({ headName, handleClick, open }) => {
+    const { isRTL } = useContext(ToggleContext);
     return (
         <ListItemButton
             disableRipple
@@ -99,7 +106,7 @@ const SubHeader = ({ headName, handleClick, open }) => {
                 },
                 width: "100%",
             }}
-            className="listVerticalLine"
+            className={`${isRTL ? "before:right-4 before:rounded-r-3xl" : "before:left-4 before:rounded-l-3xl"} listVerticalLine`}
             onClick={handleClick}
         >
             <li
@@ -120,7 +127,7 @@ const SubHeader = ({ headName, handleClick, open }) => {
     );
 };
 const Body = ({ children, open, type = "main" }) => {
-    const { openNav } = useContext(ToggleContext);
+    const { openNav, isRTL } = useContext(ToggleContext);
     return (
         openNav && (
             <Collapse
@@ -132,8 +139,8 @@ const Body = ({ children, open, type = "main" }) => {
                 <List
                     className={
                         type === "main"
-                            ? "listHorizntalLine"
-                            : "SublistHorizntalLine"
+                            ? `listHorizntalLine ${isRTL ? "after:right-4" : "after:left-4"} `
+                            : `SublistHorizntalLine ${isRTL ? "after:right-15" : "after:left-15"}`
                     }
                     component="div"
                     disablePadding
@@ -146,6 +153,7 @@ const Body = ({ children, open, type = "main" }) => {
 };
 
 const Item = ({ name, type = "main", url, disable = true }) => {
+    const { isRTL } = useContext(ToggleContext);
     return (
         <ListItemButton
             sx={{
@@ -158,7 +166,9 @@ const Item = ({ name, type = "main", url, disable = true }) => {
                 padding: 0,
             }}
             className={
-                type === "main" ? "listVerticalLine" : "SublistVerticalLine"
+                type === "main"
+                    ? `${isRTL ? "before:right-4 before:rounded-r-3xl" : "before:left-4 before:rounded-l-3xl"} listVerticalLine`
+                    : `SublistVerticalLine ${isRTL ? "before:right-15 before:rounded-r-3xl" : "before:left-15 before:rounded-l-3xl"}`
             }
         >
             <NavLink
@@ -169,7 +179,7 @@ const Item = ({ name, type = "main", url, disable = true }) => {
                             ? "mainListItem trans"
                             : "subListItem trans"
                     }
-                   `
+                `
                 }
             >
                 <p
