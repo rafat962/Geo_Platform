@@ -11,8 +11,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-
+import { useDispatch } from "react-redux";
+import { ToggleAuthorization } from "../AuthSlice";
 const LogIn = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {
         register,
@@ -34,6 +36,7 @@ const LogIn = () => {
                     queryClient.setQueryData(["userData"], data.userData);
                     navigate(`/dashboard`);
                     localStorage.setItem("token", JSON.stringify(data.token));
+                    dispatch(ToggleAuthorization(data.userData.role));
                     reset();
                 }
             },

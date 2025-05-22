@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import PropTypes from "prop-types";
 import { DialogsProvider, useDialogs } from "@toolpad/core/useDialogs";
@@ -12,6 +13,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 function MyCustomDialog({ open, onClose, payload }) {
     return (
         <Dialog fullWidth open={open} onClose={() => onClose()}>
@@ -53,23 +56,27 @@ MyCustomDialog.propTypes = {
 };
 
 function DemoContent({ children, item }) {
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     const [open, setOpen] = React.useState(false); // for backdrop
     const dialogs = useDialogs();
     const [isDeleting, setIsDeleting] = React.useState(false);
     const query = useQueryClient();
     const handleDelete = async () => {
-        const id = await dialogs.prompt("من فضلك أدخل كود الأصل", {
-            okText: "حذف",
-            cancelText: "إلغاء",
-            title: `حذف الأصل رقم ${item.attributes.OBJECTID}`,
+        const id = await dialogs.prompt(t("من فضلك أدخل كود الأصل"), {
+            okText: t("حذف"),
+            cancelText: t("إلغاء"),
+            title: `${t("حذف الأصل رقم")} ${item.attributes.OBJECTID}`,
         });
         if (+id === item.attributes.OBJECTID) {
             const deleteConfirmed = await dialogs.confirm(
-                `هل تريد حذف الأصل رقم ${id}?`,
+                `${t("هل تريد حذف الأصل رقم")}${id}?`,
                 {
-                    okText: "تأكيد",
-                    cancelText: "العودة",
-                    title: `تأكيد حذف الأصل رقم ${item.attributes.OBJECTID}`,
+                    okText: t("تأكيد"),
+                    cancelText: t("العودة"),
+                    title: `${t("تأكيد حذف الأصل رقم")} ${item.attributes.OBJECTID}`,
                 }
             );
             if (deleteConfirmed) {
@@ -79,9 +86,12 @@ function DemoContent({ children, item }) {
                 })
                     .then(() => {
                         setIsDeleting(true);
-                        toast.success(`تم حذف الأصل رقم ${id} بنجاح`, {
-                            duration: 2300,
-                        });
+                        toast.success(
+                            `${t("تم حذف الأصل رقم")} ${id} ${t("بنجاح")}`,
+                            {
+                                duration: 2300,
+                            }
+                        );
                     })
                     .catch((error) => {
                         const message =

@@ -5,10 +5,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { useSelector } from "react-redux";
 
 const Settings = () => {
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
+    const { role } = useSelector((state) => state.authorization);
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -30,39 +32,53 @@ const Settings = () => {
                         <p>{t("تحكم في إعداداتك الخاصة")}</p>
                         {/* Chips */}
                         <Stack direction="row" spacing={1}>
-                            <NavLink to="/">
-                                {({ isActive }) => (
-                                    <Chip
-                                        label={t("مشاركة")}
-                                        variant={
-                                            isActive ? "filled" : "outlined"
-                                        }
-                                        color={isActive ? "primary" : "default"}
-                                    />
-                                )}
-                            </NavLink>
-                            <NavLink to="existingEmails">
-                                {({ isActive }) => (
-                                    <Chip
-                                        label={t("الحسابات الحالية")}
-                                        variant={
-                                            isActive ? "filled" : "outlined"
-                                        }
-                                        color={isActive ? "primary" : "default"}
-                                    />
-                                )}
-                            </NavLink>
-                            <NavLink to="requestedEmails">
-                                {({ isActive }) => (
-                                    <Chip
-                                        label={t("الحسابات المطلوبة")}
-                                        variant={
-                                            isActive ? "filled" : "outlined"
-                                        }
-                                        color={isActive ? "primary" : "default"}
-                                    />
-                                )}
-                            </NavLink>
+                            {role === "admin" && (
+                                <NavLink to="/">
+                                    {({ isActive }) => (
+                                        <Chip
+                                            label={t("مشاركة")}
+                                            variant={
+                                                isActive ? "filled" : "outlined"
+                                            }
+                                            color={
+                                                isActive ? "primary" : "default"
+                                            }
+                                        />
+                                    )}
+                                </NavLink>
+                            )}
+
+                            {role === "admin" && (
+                                <NavLink to="existingEmails">
+                                    {({ isActive }) => (
+                                        <Chip
+                                            label={t("الحسابات الحالية")}
+                                            variant={
+                                                isActive ? "filled" : "outlined"
+                                            }
+                                            color={
+                                                isActive ? "primary" : "default"
+                                            }
+                                        />
+                                    )}
+                                </NavLink>
+                            )}
+                            {role === "admin" && (
+                                <NavLink to="requestedEmails">
+                                    {({ isActive }) => (
+                                        <Chip
+                                            label={t("الحسابات المطلوبة")}
+                                            variant={
+                                                isActive ? "filled" : "outlined"
+                                            }
+                                            color={
+                                                isActive ? "primary" : "default"
+                                            }
+                                        />
+                                    )}
+                                </NavLink>
+                            )}
+
                             <NavLink to="email">
                                 {({ isActive }) => (
                                     <Chip

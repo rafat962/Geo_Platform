@@ -17,7 +17,10 @@ import { useQuery } from "@tanstack/react-query";
 import { backendImagesUrl } from "../../../environment/devolpmentApi";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { useSelector, useDispatch } from "react-redux";
 const SideBar = () => {
+    // redux
+    const { role } = useSelector((state) => state.authorization);
     // lan
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
@@ -175,19 +178,22 @@ const SideBar = () => {
                         <ToggleList.Item name={t("تقارير تفصيلية")} />
                     </ToggleList.Body>
                 </ToggleList>
-
-                <ListItem
-                    toUrl="/LandUses"
-                    openNav={openNav}
-                    name={t("إستعمالات الأراضى")}
-                    icon={<HiOutlineChartPie />}
-                />
-                <ListItem
-                    toUrl="/Landmark"
-                    openNav={openNav}
-                    name={t("العلامات المميزة")}
-                    icon={<BiLandscape />}
-                />
+                {role === "admin" && (
+                    <ListItem
+                        toUrl="/LandUses"
+                        openNav={openNav}
+                        name={t("إستعمالات الأراضى")}
+                        icon={<HiOutlineChartPie />}
+                    />
+                )}
+                {role === "admin" && (
+                    <ListItem
+                        toUrl="/Landmark"
+                        openNav={openNav}
+                        name={t("العلامات المميزة")}
+                        icon={<BiLandscape />}
+                    />
+                )}
             </ListContainer>
 
             <ListContainer>

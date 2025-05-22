@@ -19,7 +19,13 @@ import { Galleria } from "primereact/galleria";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 const AssetDetails = memo(({ data, dispatch, view }) => {
+    // lan
+    const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    // -----------
     const attr = data.attributes;
     const handleBack = () => {
         useScrollToRecord(null, view, "end");
@@ -76,7 +82,8 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                         </span>
                         {/* AssetName */}
                         <span>
-                            الأصل رقم{"  --  "}
+                            {t("الأصل رقم")}
+                            {"  --  "}
                             <span className="dark:text-red-500 text-blue-950 font-semibold">
                                 {attr.OBJECTID}
                             </span>
@@ -88,7 +95,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                         <div className="w-full py-2  flex items-center justify-center">
                             {/* headName */}
                             <div className=" select-none group flex  items-center justify-center  px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
-                                معلومات الموقع والهوية الجغرافية
+                                {t("معلومات الموقع والهوية الجغرافية")}
                             </div>
                         </div>
                         <TableContainer component={Paper}>
@@ -99,28 +106,28 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="right">
-                                            رقم مميز المنطقة
+                                            {t("رقم مميز المنطقة")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز القطاع
+                                            {t("رقم مميز القطاع")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز الأمانة
+                                            {t("رقم مميز الأمانة")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز المحافظة
+                                            {t("رقم مميز المحافظة")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز البلدية
+                                            {t("رقم مميز البلدية")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز المدينة
+                                            {t("رقم مميز المدينة")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم مميز الحي
+                                            {t("رقم مميز الحي")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم المخطط
+                                            {t("رقم المخطط")}
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -168,7 +175,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
                             <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
-                                معلومات المبنى الفنية والإدارية
+                                {t("معلومات المبنى الفنية والإدارية")}
                             </div>
                         </div>
                         <TableContainer component={Paper}>
@@ -179,25 +186,27 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="right">
-                                            النوع الفرعي للاستخدام
+                                            {t("النوع الفرعي للاستخدام")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            رقم المميز للاستخدام التفصيلي للمبنى
+                                            {t(
+                                                "رقم المميز للاستخدام التفصيلي للمبنى"
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            إستعمال المبنى
+                                            {t("إستعمال المبنى")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            عدد الأدوار للمبنى
+                                            {t("عدد الأدوار للمبنى")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            سنة الإنشاء للمبنى
+                                            {t("سنة الإنشاء للمبنى")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            نوع البناء
+                                            {t("نوع البناء")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            حالة المبنى
+                                            {t("حالة المبنى")}
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -244,7 +253,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
                             <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
-                                بيانات مرجعية وتوثيقية
+                                {t("بيانات مرجعية وتوثيقية ")}
                             </div>
                         </div>
                         <TableContainer component={Paper}>
@@ -255,22 +264,22 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="right">
-                                            مصدر البيانات
+                                            {t("مصدر البيانات")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            الوصف
+                                            {t("الوصف")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            تاريخ الإنشاء
+                                            {t("تاريخ الإنشاء")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            اسم منشأ البيانات
+                                            {t("اسم منشأ البيانات")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            آخر مستخدم
+                                            {t("آخر مستخدم")}
                                         </TableCell>
                                         <TableCell align="right">
-                                            اسم المالك
+                                            {t("اسم المالك")}
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -312,7 +321,7 @@ const AssetDetails = memo(({ data, dispatch, view }) => {
                         <div className=" w-full py-2  flex items-center justify-center">
                             {/* headName */}
                             <div className=" select-none group flex  items-center justify-center px-3 md:px-8 p-2p-2 rounded-full dark:bg-black  bg-sec text-lg font-semibold tracking-wider  ">
-                                صور المبنى
+                                {t("صور المبنى")}
                             </div>
                         </div>
                         {/* img */}

@@ -10,6 +10,8 @@ import { Toaster } from "react-hot-toast";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import "./i18n.js";
+import store from "./shared/store.js";
+import { Provider } from "react-redux";
 const query = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
@@ -20,9 +22,11 @@ createRoot(document.getElementById("root")).render(
                 onReset={() => window.location.replace("/")}
             >
                 <ReactQueryDevtools initialIsOpen={false} />
-                <Theme>
-                    <App />
-                </Theme>
+                <Provider store={store}>
+                    <Theme>
+                        <App />
+                    </Theme>
+                </Provider>
                 <Toaster />
             </ErrorBoundary>
         </QueryClientProvider>

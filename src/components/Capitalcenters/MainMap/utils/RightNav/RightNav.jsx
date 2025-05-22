@@ -58,7 +58,6 @@ const RightNav = ({ smallCase = false }) => {
             {/* main container */}
             <ul className="w-full h-full flex flex-col items-center justify-start  py-2">
                 {/* Query By Attributes */}
-                (
                 <NavItem
                     disable={selectedLayer ? false : true}
                     smallCase={smallCase}
@@ -76,7 +75,7 @@ const RightNav = ({ smallCase = false }) => {
                     dispatch={dispatch}
                     dir="right"
                 />
-                ){/* Label */}
+                {/* Label */}
                 <NavItem
                     disable={selectedLayer ? false : true}
                     smallCase={smallCase}
