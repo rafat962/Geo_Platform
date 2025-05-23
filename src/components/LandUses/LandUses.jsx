@@ -1,7 +1,13 @@
 import React from "react";
+import { useMap } from "../../shared/hooks/useMap";
 
 const LandUses = () => {
-    return <div>LandUse</div>;
+    const { viewRef } = useMap();
+    return (
+        <div className="w-full h-full ">
+            <div ref={viewRef} className="w-full h-full"></div>
+        </div>
+    );
 };
 
 export default LandUses;

@@ -24,6 +24,9 @@ import getToken from "./shared/helpers/GetToken";
 import authRoutes from "./components/Auth/auth.route";
 import ProtectedRouts from "./components/Auth/gurd/Protected.Routs";
 import settingsRoutes from "./components/Settings/settings.routing";
+import { useDispatch } from "react-redux";
+import { ToggleAuthorization } from "./components/Auth/AuthSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const AppContainer = styled.div`
     box-sizing: border-box;
@@ -69,6 +72,17 @@ const routs = createBrowserRouter([
 ]);
 
 function App() {
+    // authorization
+    const dispatch = useDispatch();
+    const { data: userData } = useQuery({
+        queryKey: ["userData"],
+        queryFn: () => Promise.resolve(), // required dummy function
+        enabled: false, // disables actual fetching
+    });
+    console.log(userData);
+    useEffect(() => {
+        dispatch(ToggleAuthorization(userData?.role));
+    }, [userData, dispatch]);
     useEffect(() => {
         getToken();
         // set langage
