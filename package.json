@@ -56,5 +56,17 @@
         "typescript-eslint": "^8.24.1",
         "vite": "^6.2.0",
         "vite-plugin-eslint": "^1.8.1"
-    }
+    },
+    "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+    "main": "eslint.config.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rafat962/Geo_Platform.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rafat962/Geo_Platform/issues"
+    },
+    "homepage": "https://github.com/rafat962/Geo_Platform#readme"
 }

@@ -1,3 +1,47 @@
-.bgred {
-    background-color: red;
+.color {
+    background-color: rgba(63, 116, 151, 0.3);
+    align-items: center;
+    height: 20px;
+    padding: 30px;
+    justify-content: center;
+    display: flex;
+    font-size: 20px  ;
+        border-radius: 12px;
+}
+
+.map {
+
+    border: 5px solid rgba(63, 116, 151, 0.3);
+    font-size: 20px;
+    background-color: #f0f0f0;
+    height: 50%;
+        border-radius: 12px;
+}
+.map:hover {
+    cursor: grab;
+    filter: brightness(0.95);
+}
+
+.table {
+    max-width: 10000px;
+    margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    display: block;
+}
+
+.caption {
+    background-color: rgba(122, 173, 207, 0.3);
+    align-items: center;
+    height: 15px;
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    font-size: 18px  ;
+        border-radius: 12px;
 }
