@@ -5,6 +5,8 @@ const BASE_URL =
 
 // const backendUrl = "http://156.193.72.241:80/api/v1/";
 // const backendImagesUrl = "http://156.193.72.241:80/";
+// const backendUrl = "http://localhost/api/v1/";
+// const backendImagesUrl = "http://localhost/";
 const backendUrl = "http://127.0.0.1:8000/api/v1/";
 const backendImagesUrl = "http://127.0.0.1:8000/";
 export { client_id, client_secret, BASE_URL, backendUrl, backendImagesUrl };

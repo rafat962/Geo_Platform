@@ -8,8 +8,11 @@ export default defineConfig({
         react(),
         tailwindcss(),
         eslint({
-            // Optional: show lint errors in terminal
             include: ["src/**/*.js", "src/**/*.jsx"],
         }),
     ],
+    server: {
+        host: "0.0.0.0",
+        port: 5173,
+    },
 });
