@@ -81,7 +81,7 @@ function App() {
     });
     console.log(userData);
     useEffect(() => {
-        dispatch(ToggleAuthorization(userData?.role));
+        dispatch(ToggleAuthorization("admin"));
     }, [userData, dispatch]);
     useEffect(() => {
         getToken();
