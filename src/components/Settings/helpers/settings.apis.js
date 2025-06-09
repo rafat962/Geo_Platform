@@ -103,6 +103,18 @@ const ActiviteUser = async (id) => {
         throw err; // otherwise rethrow
     }
 };
+const userLogs = async (item) => {
+    try {
+        const response = await axiosInstance.get(`user/logs/${item}`);
+        return response.data;
+    } catch (err) {
+        // Optionally handle errors here
+        if (err.response) {
+            return err.response.data; // if backend sends structured err
+        }
+        throw err; // otherwise rethrow
+    }
+};
 
 export {
     updateUserApi,
@@ -113,4 +125,5 @@ export {
     getAllUsersApi,
     deActiviteUser,
     ActiviteUser,
+    userLogs,
 };

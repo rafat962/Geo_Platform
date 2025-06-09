@@ -10,7 +10,10 @@ import ListContainer from "./utils/ListContainer";
 import Avatar from "@mui/material/Avatar";
 import { useSideBar } from "./context/SideContext";
 import ToggleList from "./utils/ToggleList";
-import { HiOutlineChartSquareBar } from "react-icons/hi";
+import {
+    HiOutlineChartSquareBar,
+    HiOutlineDocumentReport,
+} from "react-icons/hi";
 import ListItem from "./utils/ListItem";
 import AlertDialog from "../AlertDialog";
 import { useQuery } from "@tanstack/react-query";
@@ -188,10 +191,10 @@ const SideBar = () => {
                 )}
                 {role === "admin" && (
                     <ListItem
-                        toUrl="/Landmark"
+                        toUrl="/Report/reportData"
                         openNav={openNav}
-                        name={t("العلامات المميزة")}
-                        icon={<BiLandscape />}
+                        name={t("التقارير")}
+                        icon={<HiOutlineDocumentReport />}
                     />
                 )}
             </ListContainer>

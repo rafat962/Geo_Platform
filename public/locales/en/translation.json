@@ -44,7 +44,7 @@
     "إشعارات القرى": "Village Notifications",
     "تقارير تفصيلية": "Detailed Reports",
     "إستعمالات الأراضى": "Land Uses",
-    "العلامات المميزة": "Landmarks",
+    "التقارير": "Report",
     "تسجيل الخروج": "Logout",
     "الإعدادات": "Settings",
     "تحكم في إعداداتك الخاصة": "Control your personal settings",
@@ -118,5 +118,10 @@
     "العودة": "Back",
     "تأكيد حذف الأصل رقم": "Confirm Deletion of Asset Number",
     "تم حذف الأصل رقم": "Asset Number Deleted",
-    "بنجاح": "Successfully"
+    "بنجاح": "Successfully",
+    "إرتفاع المبنى": "Building Height",
+    "حالة البناء": "Building Condition",
+    "خامة البناء": "Building Material",
+    "طباعة": "print",
+    "تحكم في بيانات التقارير الخاصة": "Manage your private report data"
 }

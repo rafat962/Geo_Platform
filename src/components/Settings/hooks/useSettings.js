@@ -5,6 +5,7 @@ import {
     getPendingUsersApi,
     updatePasswordApi,
     updateUserApi,
+    userLogs,
 } from "../helpers/settings.apis";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -80,4 +81,17 @@ export function useGetAllUsers() {
         // refetchInterval: 500000,
     });
     return { isSuccess, AllUser, error };
+}
+// -------------------- Get User Logs --------------------
+export function useGetUserLogs(item) {
+    const {
+        isSuccess,
+        data: UserLogs,
+        error,
+    } = useQuery({
+        queryKey: ["UserLogs", item],
+        queryFn: () => userLogs(item),
+        // refetchInterval: 500000,
+    });
+    return { isSuccess, UserLogs, error };
 }

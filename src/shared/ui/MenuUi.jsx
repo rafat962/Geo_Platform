@@ -20,6 +20,7 @@ import {
 } from "../../components/Settings/helpers/settings.apis";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { useGetUserLogs } from "../../components/Settings/hooks/useSettings";
 const options = [
     {
         id: 0,
@@ -27,8 +28,9 @@ const options = [
         message: "",
         icon: <BiDetail />,
         action: async (item) => {
-            console.log("1");
+            console.log(1);
         },
+        preload: true,
     },
     {
         id: 1,
@@ -39,6 +41,7 @@ const options = [
             const res = await ActiviteUser(item);
             return res;
         },
+        preload: false,
     },
     {
         id: 2,
@@ -50,6 +53,7 @@ const options = [
             const res = await deActiviteUser(item);
             return res;
         },
+        preload: false,
     },
     {
         id: 3,
@@ -61,6 +65,7 @@ const options = [
             const res = await rejectUser(item);
             return res;
         },
+        preload: false,
     },
 ];
 
@@ -73,9 +78,9 @@ const MenuUi = ({ item }) => {
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+        // return { isSuccess, UserLogs, error };
     };
     const handleClose = (option) => {
-        console.log("close");
         setAnchorEl(null);
     };
 
@@ -115,6 +120,8 @@ const MenuUi = ({ item }) => {
                         actionName={t(option.name)}
                         successMessage="done"
                         message={option.message}
+                        preload={option.preload}
+                        item={item}
                     />
                 ))}
             </Menu>

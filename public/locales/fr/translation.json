@@ -57,5 +57,16 @@
     "الحساب": "Compte",
     "تحديث البيانات": "Mettre à jour les données",
     "بيانات الحساب": "Informations du compte",
-    "يمكنك تغيير بيانات الحساب": "Vous pouvez modifier les informations de votre compte"
+    "يمكنك تغيير بيانات الحساب": "Vous pouvez modifier les informations de votre compte",
+    "إرتفاع المبنى": "Hauteur du bâtiment",
+    "حالة البناء": "État du bâtiment",
+    "خامة البناء": "Matériau de construction",
+    "طباعة": "Imprimer",
+    "تحكم في بيانات التقارير الخاصة": "Gérer vos données de rapport privées",
+    "التقارير": "Rapports",
+    "إستعمال المبنى": "Utilisation du bâtiment",
+    "الإرتفاع": "Hauteur",
+    "حالة المبنى": "État du bâtiment",
+    "مادة البناء": "Matériau de construction",
+    "كود المبنى": "Code du bâtiment"
 }

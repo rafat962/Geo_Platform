@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import { NumberTicker } from "./NumberTicker";
 
 const Tap = ({ bgColor, number, name, imgPath, textColor }) => {
     const isRTL = i18next.language === "ar"; // check current language
@@ -18,7 +19,11 @@ const Tap = ({ bgColor, number, name, imgPath, textColor }) => {
             <div
                 className={`flex flex-col ${!isRTL ? "items-start pl-4" : "items-end pr-4"}  justify-center w-full h-full `}
             >
-                <h1 className={`text-4xl font-bold ${textColor}`}>{number}</h1>
+                <NumberTicker
+                    className={`text-4xl font-bold ${textColor}`}
+                    value={number}
+                />
+                {/* <h1 className={`text-4xl font-bold ${textColor}`}>{number}</h1> */}
                 <p
                     className={`text-lg md:text-xl  text-gray-500 dark:text-gray-200 font-semibold   ${!isRTL ? "text-start max-w-26 md:max-w-43" : "text-end max-w-22 md:max-w-40"}    text-wrap`}
                 >

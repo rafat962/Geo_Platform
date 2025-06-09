@@ -8,8 +8,7 @@ import {
 import Dashboard from "./components/Dashboard/Dashboard";
 import InvestmentReq from "./components/InvestmentReq/InvestmentReq";
 import LandUses from "./components/LandUses/LandUses";
-import LandMark from "./components/LandMark/LandMark";
-import Settings from "./components/Settings/Settings";
+import Report from "./components/Report/Report";
 import LogOut from "./components/LogOut/LogOut";
 import AllCenters from "./components/Capitalcenters/AllCenters/AllCenters";
 import AddCenter from "./components/Capitalcenters/AddCenter/AddCenter";
@@ -27,6 +26,7 @@ import settingsRoutes from "./components/Settings/settings.routing";
 import { useDispatch } from "react-redux";
 import { ToggleAuthorization } from "./components/Auth/AuthSlice";
 import { useQuery } from "@tanstack/react-query";
+import ReportData from "./components/Report/ReportData/ReportData";
 
 const AppContainer = styled.div`
     box-sizing: border-box;
@@ -61,7 +61,16 @@ const routs = createBrowserRouter([
                     { path: "/dashboard", element: <Dashboard /> },
                     { path: "/InvestmentReq", element: <InvestmentReq /> },
                     { path: "/LandUses", element: <LandUses /> },
-                    { path: "/Landmark", element: <LandMark /> },
+                    {
+                        path: "/Report",
+                        element: <Report />,
+                        children: [
+                            {
+                                path: "reportData",
+                                element: <ReportData />,
+                            },
+                        ],
+                    },
                     ...settingsRoutes,
                     { path: "/LogOut", element: <LogOut /> },
                 ],
