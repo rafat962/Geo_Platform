@@ -6,6 +6,7 @@ import {
     updatePasswordApi,
     updateUserApi,
     userLogs,
+    getPermissions,
 } from "../helpers/settings.apis";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -94,4 +95,17 @@ export function useGetUserLogs(item) {
         // refetchInterval: 500000,
     });
     return { isSuccess, UserLogs, error };
+}
+// -------------------- Get Permissions --------------------
+export function useGetPermissions(item) {
+    const {
+        isSuccess,
+        data: UserPermissions,
+        error,
+    } = useQuery({
+        queryKey: ["UserPermissions", item],
+        queryFn: () => getPermissions(item),
+        // refetchInterval: 500000,
+    });
+    return { isSuccess, UserPermissions, error };
 }

@@ -116,6 +116,36 @@ const userLogs = async (item) => {
     }
 };
 
+// --------------------- Permissions ---------------------
+const setPermission = async (item, permissions) => {
+    try {
+        const response = await axiosInstance.post(
+            `user/permissions/${item}`,
+            permissions
+        );
+        return response.data;
+    } catch (err) {
+        // Optionally handle errors here
+        if (err.response) {
+            return err.response.data; // if backend sends structured err
+        }
+        throw err; // otherwise rethrow
+    }
+};
+// --------------------- getPermissions ---------------------
+
+const getPermissions = async (item) => {
+    try {
+        const response = await axiosInstance.get(`user/getPermissions/${item}`);
+        return response?.data?.permissions;
+    } catch (err) {
+        // Optionally handle errors here
+        if (err.response) {
+            return err.response.data; // if backend sends structured err
+        }
+        throw err; // otherwise rethrow
+    }
+};
 export {
     updateUserApi,
     updatePasswordApi,
@@ -126,4 +156,6 @@ export {
     deActiviteUser,
     ActiviteUser,
     userLogs,
+    setPermission,
+    getPermissions,
 };

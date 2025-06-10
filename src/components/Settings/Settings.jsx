@@ -47,7 +47,6 @@ const Settings = () => {
                                     )}
                                 </NavLink>
                             )}
-
                             {role === "admin" && (
                                 <NavLink to="existingEmails">
                                     {({ isActive }) => (

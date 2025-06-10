@@ -59,8 +59,6 @@ export default function DialogUi({
         { field: "day", headerName: "day", width: 200 },
         { field: "time", headerName: "time", width: 200 },
     ];
-    console.log(finalData);
-
     const handleClose = () => {
         setOpen(false);
         handleCloseMenu();

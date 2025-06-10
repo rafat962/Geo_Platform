@@ -56,7 +56,6 @@ export function useActive() {
             toast.error(error?.message || "");
         },
         onSuccess: (data, variables, context) => {
-            console.log(data);
             if (data.status === "error") {
                 toast.error(data.message);
                 return;

@@ -88,9 +88,13 @@ function App() {
         queryFn: () => Promise.resolve(), // required dummy function
         enabled: false, // disables actual fetching
     });
-    console.log(userData);
     useEffect(() => {
-        dispatch(ToggleAuthorization("admin"));
+        dispatch(
+            ToggleAuthorization({
+                permissions: userData?.permissions || [],
+                role: userData?.role || "",
+            })
+        );
     }, [userData, dispatch]);
     useEffect(() => {
         getToken();

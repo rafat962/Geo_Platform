@@ -4,7 +4,9 @@ import DataTable from "../../../shared/ui/DataTable";
 import { useGetAllUsers } from "../hooks/useSettings";
 import Loader from "../../../shared/ui/Loader";
 import MenuUi from "../../../shared/ui/MenuUi";
+import { useSelector } from "react-redux";
 const ExistingEmail = () => {
+    const { role } = useSelector((state) => state.authorization);
     const columns = [
         { field: "id", headerName: "ID", width: 200 },
         { field: "name", headerName: "Name", width: 200 },
@@ -18,12 +20,11 @@ const ExistingEmail = () => {
             width: 150,
             sortable: false,
             filterable: false,
-            renderCell: (params) => <MenuUi item={params.row.id} />,
+            renderCell: (params) => (
+                <MenuUi role={params.row.role} item={params.row.id} />
+            ),
         },
     ];
-    const handleActionClick = (id) => {
-        console.log("Clicked row ID:", id);
-    };
     const [rows, setRows] = useState([]);
     const { isSuccess, AllUser, error } = useGetAllUsers();
     useEffect(() => {

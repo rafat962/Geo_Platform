@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     role: "user",
+    permissions: [],
 };
 
 const AuthSlice = createSlice({
@@ -11,7 +12,8 @@ const AuthSlice = createSlice({
         ToggleAuthorization: (state, action) => {
             return {
                 ...initialState,
-                role: action.payload,
+                role: action.payload.role,
+                permissions: action.payload.permissions,
             };
         },
     },

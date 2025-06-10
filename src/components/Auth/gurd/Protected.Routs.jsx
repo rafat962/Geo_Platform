@@ -33,7 +33,6 @@ const ProtectedRoutes = () => {
             </Backdrop>
         );
     }
-    console.log(status);
     // Failed verification
     if (status !== 200) {
         navigate("/");

@@ -8,6 +8,7 @@ import {
     HiMiniWrenchScrewdriver,
     HiOutlineCheck,
     HiOutlinePencil,
+    HiOutlinePencilSquare,
     HiOutlineTrash,
     HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
@@ -21,55 +22,84 @@ import {
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { useGetUserLogs } from "../../components/Settings/hooks/useSettings";
-const options = [
-    {
-        id: 0,
-        name: "مشاهدة السجل",
-        message: "",
-        icon: <BiDetail />,
-        action: async (item) => {
-            console.log(1);
+import PermissionDialog from "../../components/Settings/ExistingEmail/utils/PermissionDialog";
+const MenuUi = ({ item, role }) => {
+    const options = [
+        {
+            id: 0,
+            name: "مشاهدة السجل",
+            message: "",
+            icon: <BiDetail />,
+            action: async (item) => {
+                console.log(1);
+            },
+            preload: true,
+            disable: false,
         },
-        preload: true,
-    },
-    {
-        id: 1,
-        name: "تفعيل الحساب",
-        message: "سيتم تفعيل الحساب بصورة نهائية",
-        icon: <HiOutlineCheck />,
-        action: async (item) => {
-            const res = await ActiviteUser(item);
-            return res;
+        {
+            id: 1,
+            name: "تفعيل الحساب",
+            message: "سيتم تفعيل الحساب بصورة نهائية",
+            icon: <HiOutlineCheck />,
+            action: async (item) => {
+                if (role === "admin") {
+                    return;
+                }
+                const res = await ActiviteUser(item);
+                return res;
+            },
+            preload: false,
+            disable: role === "admin",
         },
-        preload: false,
-    },
-    {
-        id: 2,
-        name: "إيقاف مؤقت",
-        message:
-            "هل تريد إيقاف الحساب بصورة مؤقتة ؟ يمكنك إعادة تنشيط الحساب في وقت لاحق",
-        icon: <HiOutlineWrenchScrewdriver />,
-        action: async (item) => {
-            const res = await deActiviteUser(item);
-            return res;
+        {
+            id: 2,
+            name: "إيقاف مؤقت",
+            message:
+                "هل تريد إيقاف الحساب بصورة مؤقتة ؟ يمكنك إعادة تنشيط الحساب في وقت لاحق",
+            icon: <HiOutlineWrenchScrewdriver />,
+            action: async (item) => {
+                if (role === "admin") {
+                    return;
+                }
+                const res = await deActiviteUser(item);
+                return res;
+            },
+            preload: false,
+            disable: role === "admin",
         },
-        preload: false,
-    },
-    {
-        id: 3,
-        name: "إيقاف نهائى",
-        message:
-            "هل تريد إيقاف الحساب بصورة نهائية ؟ في حالة الإيقاف يتم حذف الحساب",
-        icon: <HiOutlineTrash />,
-        action: async (item) => {
-            const res = await rejectUser(item);
-            return res;
+        {
+            id: 3,
+            name: "إيقاف نهائى",
+            message:
+                "هل تريد إيقاف الحساب بصورة نهائية ؟ في حالة الإيقاف يتم حذف الحساب",
+            icon: <HiOutlineTrash />,
+            action: async (item) => {
+                if (role === "admin") {
+                    return;
+                }
+                const res = await rejectUser(item);
+                return res;
+            },
+            preload: false,
+            disable: role === "admin",
         },
-        preload: false,
-    },
-];
-
-const MenuUi = ({ item }) => {
+        {
+            id: 4,
+            name: "الصلاحيات",
+            message:
+                "هل تريد إيقاف الحساب بصورة نهائية ؟ في حالة الإيقاف يتم حذف الحساب",
+            icon: <HiOutlinePencilSquare />,
+            action: async (item) => {
+                if (role === "admin") {
+                    return;
+                }
+                const res = await rejectUser(item);
+                return res;
+            },
+            preload: false,
+            disable: role === "admin",
+        },
+    ];
     // lan
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
@@ -83,7 +113,15 @@ const MenuUi = ({ item }) => {
     const handleClose = (option) => {
         setAnchorEl(null);
     };
+    // ---- dialog
+    const [openPermission, setopenPermission] = React.useState(false);
+    const handleClickOpen = () => {
+        setopenPermission(true);
+    };
 
+    const handlePermissionClose = () => {
+        setopenPermission(false);
+    };
     return (
         <div>
             <IconButton
@@ -105,25 +143,62 @@ const MenuUi = ({ item }) => {
                 open={open}
                 onClose={handleClose}
             >
-                {options.map((option) => (
-                    <DialogUi
-                        content={
+                {options.map((option) => {
+                    // For option.id === 4 (special case)
+                    if (option.id === 4) {
+                        return (
                             <MenuItem key={option.id}>
-                                <div className="flex items-center justify-start space-x-2 ">
+                                <div
+                                    onClick={handleClickOpen}
+                                    className="flex items-center justify-start space-x-2"
+                                >
+                                    <p className="w-fit">{t(option.name)}</p>
+                                    <span>{option.icon}</span>
+                                </div>
+                                <PermissionDialog
+                                    item={item}
+                                    open={openPermission}
+                                    handleClose={handlePermissionClose}
+                                />
+                            </MenuItem>
+                        );
+                    }
+                    // For disabled options (except id 4)
+                    if (option.disable) {
+                        return (
+                            <MenuItem disabled key={option.id}>
+                                <div className="flex items-center justify-start space-x-2 text-gray-500">
                                     <p className="w-fit">{t(option.name)}</p>
                                     <span>{option.icon}</span>
                                 </div>
                             </MenuItem>
-                        }
-                        handleCloseMenu={handleClose}
-                        action={() => option.action(item)}
-                        actionName={t(option.name)}
-                        successMessage="done"
-                        message={option.message}
-                        preload={option.preload}
-                        item={item}
-                    />
-                ))}
+                        );
+                    }
+
+                    // For normal options
+                    return (
+                        <DialogUi
+                            content={
+                                <MenuItem key={option.id}>
+                                    <div className="flex items-center justify-start space-x-2">
+                                        <p className="w-fit">
+                                            {t(option.name)}
+                                        </p>
+                                        <span>{option.icon}</span>
+                                    </div>
+                                </MenuItem>
+                            }
+                            handleCloseMenu={handleClose}
+                            action={() => option.action(item)}
+                            actionName={t(option.name)}
+                            successMessage="done"
+                            message={option.message}
+                            preload={option.preload}
+                            item={item}
+                            key={option.id}
+                        />
+                    );
+                })}
             </Menu>
         </div>
     );

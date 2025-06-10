@@ -23,7 +23,8 @@ import i18next from "i18next";
 import { useSelector, useDispatch } from "react-redux";
 const SideBar = () => {
     // redux
-    const { role } = useSelector((state) => state.authorization);
+    const { permissions } = useSelector((state) => state.authorization);
+    console.log(permissions);
     // lan
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
@@ -82,106 +83,136 @@ const SideBar = () => {
                     name={t("الرئيسية")}
                     icon={<HiOutlineChartSquareBar />}
                 />
-                <ListItem
-                    target="_blank"
-                    toUrl="/MainMap"
-                    openNav={openNav}
-                    name={t("خريطة المعلومات")}
-                    icon={<HiOutlineCommandLine />}
-                />
-
-                <ToggleList openNav={openNav}>
-                    <ToggleList.Header
-                        open={wekala}
-                        icon={<BiLayer className="text-xl" />}
-                        headName={t("منطقة العاصمة")}
-                        handleClick={() => handleClick("wekala")}
+                {permissions.includes("MainMap") && (
+                    <ListItem
+                        target="_blank"
+                        toUrl="/MainMap"
+                        openNav={openNav}
+                        name={t("خريطة المعلومات")}
+                        icon={<HiOutlineCommandLine />}
                     />
-                    <ToggleList.Body open={wekala}>
-                        <ToggleList.SubHeader
-                            open={investmentAssets}
-                            handleClick={() => handleClick("investmentAssets")}
-                            headName={t("المراكز الإدارية")}
-                        />
-                        <ToggleList.Body type="other" open={investmentAssets}>
-                            <ToggleList.Item
-                                disable={false}
-                                url="/CapitalCenter/AllCenters"
-                                type="other"
-                                name={t("عرض المراكز")}
+                )}
+                {permissions.includes("CapitalCenter") && (
+                    <>
+                        <ToggleList openNav={openNav}>
+                            <ToggleList.Header
+                                open={wekala}
+                                icon={<BiLayer className="text-xl" />}
+                                headName={t("منطقة العاصمة")}
+                                handleClick={() => handleClick("wekala")}
                             />
-                            <ToggleList.Item
-                                disable={false}
-                                url="/CapitalCenter/AddCenter"
-                                type="other"
-                                name={t("إضافة مركز")}
-                            />
-                        </ToggleList.Body>
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("طلبات المنطقة")}
-                        />
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("الخريطة الجغرافية")}
-                        />
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("متابعة ميدانية للمنطقة")}
-                        />
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("الفرص في المنطقة")}
-                        />
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("الإشعارات الجغرافية")}
-                        />
-                        <ToggleList.Item
-                            url="/other"
-                            name={t("تقارير المنطقة")}
-                        />
-                    </ToggleList.Body>
-
-                    <ToggleList.Header
-                        open={gov}
-                        icon={<BiLayer className="text-xl" />}
-                        headName={t("منطقة الشمال")}
-                        handleClick={() => handleClick("gov")}
-                    />
-                    <ToggleList.Body open={gov}>
-                        <ToggleList.SubHeader
-                            open={govAssets}
-                            handleClick={() => handleClick("govAssets")}
-                            headName={t("القرى التابعة")}
-                        />
-                        <ToggleList.Body type="other" open={govAssets}>
-                            <ToggleList.Item
-                                type="other"
-                                name={t("عرض القرى")}
-                            />
-                            <ToggleList.Item
-                                type="other"
-                                name={t("إضافة قرية")}
-                            />
-                            <ToggleList.Item
-                                type="other"
-                                name={t("تحديث حالة القرية")}
-                            />
-                            <ToggleList.Item
-                                type="other"
-                                name={t("تقرير القرى")}
-                            />
-                        </ToggleList.Body>
-                        <ToggleList.Item name={t("طلبات القرى")} />
-                        <ToggleList.Item name={t("الخريطة الجغرافية")} />
-                        <ToggleList.Item name={t("متابعة ميدانية")} />
-                        <ToggleList.Item name={t("الفرص في القرى")} />
-                        <ToggleList.Item name={t("إشعارات القرى")} />
-                        <ToggleList.Item name={t("تقارير تفصيلية")} />
-                    </ToggleList.Body>
-                </ToggleList>
-                {role === "admin" && (
+                            <ToggleList.Body open={wekala}>
+                                <ToggleList.SubHeader
+                                    open={investmentAssets}
+                                    handleClick={() =>
+                                        handleClick("investmentAssets")
+                                    }
+                                    headName={t("المراكز الإدارية")}
+                                />
+                                <ToggleList.Body
+                                    type="other"
+                                    open={investmentAssets}
+                                >
+                                    <ToggleList.Item
+                                        disable={false}
+                                        url="/CapitalCenter/AllCenters"
+                                        type="other"
+                                        name={t("عرض المراكز")}
+                                    />
+                                    <ToggleList.Item
+                                        disable={false}
+                                        url="/CapitalCenter/AddCenter"
+                                        type="other"
+                                        name={t("إضافة مركز")}
+                                    />
+                                </ToggleList.Body>
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("طلبات المنطقة")}
+                                />
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("الخريطة الجغرافية")}
+                                />
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("متابعة ميدانية للمنطقة")}
+                                />
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("الفرص في المنطقة")}
+                                />
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("الإشعارات الجغرافية")}
+                                />
+                                <ToggleList.Item
+                                    url="/other"
+                                    name={t("تقارير المنطقة")}
+                                />
+                            </ToggleList.Body>
+                            {permissions.includes("NorthArea") && (
+                                <>
+                                    <ToggleList.Header
+                                        open={gov}
+                                        icon={<BiLayer className="text-xl" />}
+                                        headName={t("منطقة الشمال")}
+                                        handleClick={() => handleClick("gov")}
+                                    />
+                                    <ToggleList.Body open={gov}>
+                                        <ToggleList.SubHeader
+                                            open={govAssets}
+                                            handleClick={() =>
+                                                handleClick("govAssets")
+                                            }
+                                            headName={t("القرى التابعة")}
+                                        />
+                                        <ToggleList.Body
+                                            type="other"
+                                            open={govAssets}
+                                        >
+                                            <ToggleList.Item
+                                                type="other"
+                                                name={t("عرض القرى")}
+                                            />
+                                            <ToggleList.Item
+                                                type="other"
+                                                name={t("إضافة قرية")}
+                                            />
+                                            <ToggleList.Item
+                                                type="other"
+                                                name={t("تحديث حالة القرية")}
+                                            />
+                                            <ToggleList.Item
+                                                type="other"
+                                                name={t("تقرير القرى")}
+                                            />
+                                        </ToggleList.Body>
+                                        <ToggleList.Item
+                                            name={t("طلبات القرى")}
+                                        />
+                                        <ToggleList.Item
+                                            name={t("الخريطة الجغرافية")}
+                                        />
+                                        <ToggleList.Item
+                                            name={t("متابعة ميدانية")}
+                                        />
+                                        <ToggleList.Item
+                                            name={t("الفرص في القرى")}
+                                        />
+                                        <ToggleList.Item
+                                            name={t("إشعارات القرى")}
+                                        />
+                                        <ToggleList.Item
+                                            name={t("تقارير تفصيلية")}
+                                        />
+                                    </ToggleList.Body>
+                                </>
+                            )}
+                        </ToggleList>
+                    </>
+                )}
+                {permissions.includes("LandUse") && (
                     <ListItem
                         toUrl="/LandUses"
                         openNav={openNav}
@@ -189,7 +220,7 @@ const SideBar = () => {
                         icon={<HiOutlineChartPie />}
                     />
                 )}
-                {role === "admin" && (
+                {permissions.includes("Reports") && (
                     <ListItem
                         toUrl="/Report/reportData"
                         openNav={openNav}
@@ -200,12 +231,14 @@ const SideBar = () => {
             </ListContainer>
 
             <ListContainer>
-                <ListItem
-                    toUrl="/settings/email"
-                    openNav={openNav}
-                    name={t("الإعدادات")}
-                    icon={<HiAdjustmentsVertical />}
-                />
+                {permissions.includes("Settings") && (
+                    <ListItem
+                        toUrl="/settings/email"
+                        openNav={openNav}
+                        name={t("الإعدادات")}
+                        icon={<HiAdjustmentsVertical />}
+                    />
+                )}
                 <AlertDialog
                     content={
                         <ListItem
