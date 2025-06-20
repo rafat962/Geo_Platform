@@ -33,22 +33,10 @@ const Settings = () => {
                         {/* Chips */}
                         <Stack direction="row" spacing={1}>
                             {role === "admin" && (
-                                <NavLink to="/">
-                                    {({ isActive }) => (
-                                        <Chip
-                                            label={t("مشاركة")}
-                                            variant={
-                                                isActive ? "filled" : "outlined"
-                                            }
-                                            color={
-                                                isActive ? "primary" : "default"
-                                            }
-                                        />
-                                    )}
-                                </NavLink>
-                            )}
-                            {role === "admin" && (
-                                <NavLink to="existingEmails">
+                                <NavLink
+                                    
+                                    to="existingEmails"
+                                >
                                     {({ isActive }) => (
                                         <Chip
                                             label={t("الحسابات الحالية")}

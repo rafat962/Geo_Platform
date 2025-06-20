@@ -16,11 +16,11 @@ const query = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
-        <QueryClientProvider client={query}>
-            <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.replace("/")}
-            >
+        <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onReset={() => window.location.replace("/")}
+        >
+            <QueryClientProvider client={query}>
                 <ReactQueryDevtools initialIsOpen={false} />
                 <Provider store={store}>
                     <Theme>
@@ -28,7 +28,7 @@ createRoot(document.getElementById("root")).render(
                     </Theme>
                 </Provider>
                 <Toaster />
-            </ErrorBoundary>
-        </QueryClientProvider>
+            </QueryClientProvider>
+        </ErrorBoundary>
     </StrictMode>
 );

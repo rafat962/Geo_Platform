@@ -1,18 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useRef, useState } from "react";
 import useAddWedgites from "./useAddWedgites";
-import { PointsLayerService } from "../static/StaticMapData";
 import useView from "./useView";
 
-export const useMap = (basemap = "satellite") => {
+export const useMap = (basemap = "satellite", ...layers) => {
     const viewRef = useRef(null);
     let [mapViewModel, setView] = useState(null);
     let [mapModel, setmap] = useState(null);
     useEffect(() => {
-        const layer = PointsLayerService;
         // --------------- View And Map ---------------
         // 2d view
-        let { view, map } = useView(viewRef, basemap, layer);
+        let { view, map } = useView(viewRef, basemap, ...layers);
         setView(view);
         setmap(map);
         // --------------- widgets ---------------

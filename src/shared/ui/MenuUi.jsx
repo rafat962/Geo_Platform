@@ -30,9 +30,7 @@ const MenuUi = ({ item, role }) => {
             name: "مشاهدة السجل",
             message: "",
             icon: <BiDetail />,
-            action: async (item) => {
-                console.log(1);
-            },
+            action: async (item) => {},
             preload: true,
             disable: false,
         },

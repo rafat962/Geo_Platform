@@ -7,8 +7,11 @@ import AssetDetails from "./utils/actions/AssetDetails";
 import AssetUpdate from "./utils/actions/AssetUpdate";
 import { motion } from "framer-motion";
 import { useMap } from "../../../shared/hooks/useMap";
+import { PointsLayerService } from "../../../shared/static/StaticMapData";
+import useView from "../../../shared/hooks/useView";
 const AllCenters = () => {
     const { viewRef, mapViewModel } = useMap();
+    useView(viewRef, 6, [43, 18.5], "satellite", PointsLayerService);
     const { state, dispatch } = useAstsContext();
     const { detailsState, updateState, ItemData } = state;
     return (

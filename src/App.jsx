@@ -27,6 +27,7 @@ import { useDispatch } from "react-redux";
 import { ToggleAuthorization } from "./components/Auth/AuthSlice";
 import { useQuery } from "@tanstack/react-query";
 import ReportData from "./components/Report/ReportData/ReportData";
+import billboardRoutes from "./components/billboards/billboard.routing.jsx";
 
 const AppContainer = styled.div`
     box-sizing: border-box;
@@ -72,6 +73,7 @@ const routs = createBrowserRouter([
                         ],
                     },
                     ...settingsRoutes,
+                    ...billboardRoutes,
                     { path: "/LogOut", element: <LogOut /> },
                 ],
             },

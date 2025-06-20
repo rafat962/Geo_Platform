@@ -2,6 +2,7 @@
 import { BiLandscape, BiLayer } from "react-icons/bi";
 import {
     HiAdjustmentsVertical,
+    HiComputerDesktop,
     HiMiniArrowRightStartOnRectangle,
     HiOutlineChartPie,
     HiOutlineCommandLine,
@@ -24,7 +25,6 @@ import { useSelector, useDispatch } from "react-redux";
 const SideBar = () => {
     // redux
     const { permissions } = useSelector((state) => state.authorization);
-    console.log(permissions);
     // lan
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
@@ -38,8 +38,15 @@ const SideBar = () => {
     const photo = `${backendImagesUrl}/users/${userData?.photo}`;
     // open Toggle
     const { dispatch, state } = useSideBar();
-    const { wekala, gov, investmentAssets, govAssets, NavWidth, openNav } =
-        state;
+    const {
+        wekala,
+        billboards,
+        investmentAssets,
+        billboardsAssets,
+        NavWidth,
+        openNav,
+        billboardsitself,
+    } = state;
     const handleClick = (type) => {
         dispatch({ type: type });
     };
@@ -154,58 +161,78 @@ const SideBar = () => {
                             {permissions.includes("NorthArea") && (
                                 <>
                                     <ToggleList.Header
-                                        open={gov}
-                                        icon={<BiLayer className="text-xl" />}
-                                        headName={t("منطقة الشمال")}
-                                        handleClick={() => handleClick("gov")}
+                                        open={billboards}
+                                        icon={
+                                            <HiComputerDesktop className="text-xl" />
+                                        }
+                                        headName={t("اللوحات الإعلانية")}
+                                        handleClick={() =>
+                                            handleClick("billboards")
+                                        }
                                     />
-                                    <ToggleList.Body open={gov}>
+                                    <ToggleList.Body open={billboards}>
+                                        <ToggleList.Item
+                                            url="/billboardsDashboard"
+                                            disable={false}
+                                            name={t("لوحة المعلومات")}
+                                        />
                                         <ToggleList.SubHeader
-                                            open={govAssets}
+                                            open={billboardsAssets}
                                             handleClick={() =>
-                                                handleClick("govAssets")
+                                                handleClick("billboardsAssets")
                                             }
-                                            headName={t("القرى التابعة")}
+                                            headName={t("طلبات اللواحات")}
                                         />
                                         <ToggleList.Body
                                             type="other"
-                                            open={govAssets}
+                                            open={billboardsAssets}
+                                        >
+                                            <ToggleList.Item
+                                                disable={false}
+                                                type="other"
+                                                name={t("الطلبات الحالية")}
+                                                url="/billboardsReq/CurrentReq"
+                                            />
+                                            <ToggleList.Item
+                                                disable={false}
+                                                type="other"
+                                                name={t("إضافة طلب")}
+                                                url="/billboardsReq/AddReq"
+                                            />
+                                            <ToggleList.Item
+                                                type="other"
+                                                name={t("طباعة تقرير")}
+                                            />
+                                        </ToggleList.Body>
+                                        {/* billboards itself */}
+                                        <ToggleList.SubHeader
+                                            open={billboardsitself}
+                                            handleClick={() =>
+                                                handleClick("billboardsitself")
+                                            }
+                                            headName={t("بيانات اللوحات")}
+                                        />
+                                        <ToggleList.Body
+                                            type="other"
+                                            open={billboardsitself}
                                         >
                                             <ToggleList.Item
                                                 type="other"
-                                                name={t("عرض القرى")}
+                                                name={t("لوحة المعلومات")}
                                             />
                                             <ToggleList.Item
                                                 type="other"
-                                                name={t("إضافة قرية")}
+                                                name={t("إضافة لوحة")}
                                             />
                                             <ToggleList.Item
                                                 type="other"
-                                                name={t("تحديث حالة القرية")}
+                                                name={t("تحديث بيانات اللوحات")}
                                             />
                                             <ToggleList.Item
                                                 type="other"
-                                                name={t("تقرير القرى")}
+                                                name={t("طباعة تقرير")}
                                             />
                                         </ToggleList.Body>
-                                        <ToggleList.Item
-                                            name={t("طلبات القرى")}
-                                        />
-                                        <ToggleList.Item
-                                            name={t("الخريطة الجغرافية")}
-                                        />
-                                        <ToggleList.Item
-                                            name={t("متابعة ميدانية")}
-                                        />
-                                        <ToggleList.Item
-                                            name={t("الفرص في القرى")}
-                                        />
-                                        <ToggleList.Item
-                                            name={t("إشعارات القرى")}
-                                        />
-                                        <ToggleList.Item
-                                            name={t("تقارير تفصيلية")}
-                                        />
                                     </ToggleList.Body>
                                 </>
                             )}

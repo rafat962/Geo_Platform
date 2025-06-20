@@ -51,9 +51,6 @@ const ProfileData = () => {
         if (file instanceof File) {
             formData.append("file", file);
         }
-        // for (const pair of formData.entries()) {
-        //     console.log(pair[0], pair[1]);
-        // }
         updateDataMutate(formData, {
             onSuccess: (data) => {},
         });

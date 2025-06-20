@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useMap } from "../../../../shared/hooks/useMap";
 import { useNavContext } from "../context/NavContext";
+import { PointsLayerService } from "../../../../shared/static/StaticMapData";
+import useView from "../../../../shared/hooks/useView";
 
 const MapMain = () => {
     const { viewRef, mapViewModel } = useMap();
+    useView(viewRef, "satellite", PointsLayerService);
     const { dispatch } = useNavContext();
     useEffect(() => {
         dispatch({

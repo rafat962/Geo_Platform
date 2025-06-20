@@ -4,9 +4,10 @@ const sideContext = createContext();
 
 const initState = {
     wekala: false,
-    gov: false,
+    billboards: false,
     investmentAssets: false,
-    govAssets: false,
+    billboardsAssets: false,
+    billboardsitself: false,
     openNav: true,
     NavWidth: "w-[13rem]",
 };
@@ -15,12 +16,18 @@ function reducer(state, action) {
     switch (action.type) {
         case "wekala":
             return { ...state, wekala: !state.wekala, investmentAssets: false };
-        case "gov":
-            return { ...state, gov: !state.gov, govAssets: false };
+        case "billboards":
+            return {
+                ...state,
+                billboards: !state.billboards,
+                billboardsAssets: false,
+            };
         case "investmentAssets":
             return { ...state, investmentAssets: !state.investmentAssets };
-        case "govAssets":
-            return { ...state, govAssets: !state.govAssets };
+        case "billboardsAssets":
+            return { ...state, billboardsAssets: !state.billboardsAssets };
+        case "billboardsitself":
+            return { ...state, billboardsitself: !state.billboardsitself };
         case "openNav":
             return { ...state, openNav: !state.openNav };
         case "NavWidth":

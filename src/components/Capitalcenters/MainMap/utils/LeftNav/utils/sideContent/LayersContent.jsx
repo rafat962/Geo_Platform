@@ -19,7 +19,7 @@ const LayersContent = () => {
                     open: false,
                 };
                 // Add custom actions
-                item.actionsOpen = true;
+                item.actionsOpen = false;
                 item.actionsSections = [
                     [
                         {

@@ -16,6 +16,7 @@ async function getToken() {
         }
     );
     const Data = await res.json();
+    console.log(JSON.parse(localStorage.getItem("LayerToken")));
     localStorage.setItem("LayerToken", JSON.stringify(Data.access_token));
 }
 export default getToken;
