@@ -1,5 +1,5 @@
-const client_id = "";
-const client_secret = "";
+const client_id = "WH0LmusDlyfSa01r";
+const client_secret = "73c97cfef0464634892fb8e5c27fbeb7";
 // const client_id = "rterk8YXHzvhCm6P";
 // const client_secret = "667dd1feca3c421da2ce612655c229bc";
 const BASE_URL =

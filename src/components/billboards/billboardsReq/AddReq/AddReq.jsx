@@ -6,7 +6,7 @@ import { billboards } from "../../helpers/billboard.StaticData";
 const AddReq = () => {
     const { viewRef } = useMap(null);
     useView(viewRef, 11, [39.22, 21.45], "satellite", billboards);
-    return <div>B7bek ya Salah Ya mgnooooon</div>;
+    return <div ref={viewRef} className="w-[100vw] h-[50vh]"></div>;
 };
 
 export default AddReq;
