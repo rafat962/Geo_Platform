@@ -1,5 +1,7 @@
-const client_id = "rterk8YXHzvhCm6P";
-const client_secret = "667dd1feca3c421da2ce612655c229bc";
+const client_id = "";
+const client_secret = "";
+// const client_id = "rterk8YXHzvhCm6P";
+// const client_secret = "667dd1feca3c421da2ce612655c229bc";
 const BASE_URL =
     "https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/";
 

@@ -4,13 +4,22 @@ esriConfig.apiKey = JSON.parse(localStorage.getItem("LayerToken"));
 const layer = new FeatureLayer({
     // url:"https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1_ExportFeatures/FeatureServer",
     portalItem: {
-        id: "5f5a2fe774de40bc96d360d7feca07ef", // Your portal item ID
+        id: "5f5a2fe774de40bc96d360d7feca07ef111", // Your portal item ID
     },
     outFields: ["*"], // Ensure all fields are available
 });
+// const layer = new FeatureLayer({
+//     // url:"https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1_ExportFeatures/FeatureServer",
+//     portalItem: {
+//         id: "5f5a2fe774de40bc96d360d7feca07ef", // Your portal item ID
+//     },
+//     outFields: ["*"], // Ensure all fields are available
+// });
 
 const layerUrl =
-    "https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1/FeatureServer";
+    "https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1/FeatureServer111";
+// const layerUrl =
+//     "https://services9.arcgis.com/ONBxkqBd9gmR0qpr/arcgis/rest/services/T1/FeatureServer";
 
 const center = [43, 18.5];
 const zoom = 6;
