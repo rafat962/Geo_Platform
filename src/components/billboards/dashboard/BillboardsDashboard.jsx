@@ -10,9 +10,8 @@ import Select from "@mui/material/Select";
 import { Controller, useForm } from "react-hook-form";
 import { billboards } from "../helpers/billboard.StaticData";
 import Map from "./utils/Map";
-import { Button } from "@mui/material";
+import { Button, Checkbox, ListItemText, OutlinedInput } from "@mui/material";
 import { NumberTicker } from "../../../shared/ui/NumberTicker";
-
 const taps = [
     {
         name: "لوحات معطلة",
@@ -38,6 +37,62 @@ const taps = [
 ];
 const BillboardsDashboard = () => {
     const [tapss, setTaps] = useState(taps);
+    const [view, setView] = useState();
+    view?.when(() => {
+        const handle = view.watch("stationary", (isStationary) => {
+            if (isStationary) {
+                billboards
+                    .queryFeatureCount({
+                        geometry: view.extent, // use final extent
+                        where: "status=0",
+                    })
+                    .then((count) => {
+                        setTaps((prevTaps) => {
+                            const updatedTaps = [...prevTaps];
+                            updatedTaps[2] = {
+                                ...updatedTaps[2],
+                                number: count.toString(),
+                            };
+                            return updatedTaps;
+                        });
+                    });
+                billboards
+                    .queryFeatureCount({
+                        geometry: view.extent, // use final extent
+                        where: "status=1",
+                    })
+                    .then((count) => {
+                        setTaps((prevTaps) => {
+                            const updatedTaps = [...prevTaps];
+                            updatedTaps[1] = {
+                                ...updatedTaps[1],
+                                number: count.toString(),
+                            };
+                            return updatedTaps;
+                        });
+                    });
+                billboards
+                    .queryFeatureCount({
+                        geometry: view.extent, // use final extent
+                        where: "status=2",
+                    })
+                    .then((count) => {
+                        setTaps((prevTaps) => {
+                            const updatedTaps = [...prevTaps];
+                            updatedTaps[0] = {
+                                ...updatedTaps[0],
+                                number: count.toString(),
+                            };
+                            return updatedTaps;
+                        });
+                    });
+            }
+        });
+        return () => {
+            handle?.remove();
+        };
+    });
+
     // get Taps Nums
     useEffect(() => {
         billboards
@@ -46,7 +101,6 @@ const BillboardsDashboard = () => {
                 outFields: [""],
             })
             .then((count) => {
-                console.log(count);
                 setTaps((prevTaps) => {
                     const updatedTaps = [...prevTaps];
                     updatedTaps[2] = {
@@ -64,7 +118,6 @@ const BillboardsDashboard = () => {
                 outFields: [""],
             })
             .then((count) => {
-                console.log(count);
                 setTaps((prevTaps) => {
                     const updatedTaps = [...prevTaps];
                     updatedTaps[1] = {
@@ -82,7 +135,6 @@ const BillboardsDashboard = () => {
                 outFields: [""],
             })
             .then((count) => {
-                console.log(count);
                 setTaps((prevTaps) => {
                     const updatedTaps = [...prevTaps];
                     updatedTaps[0] = {
@@ -118,7 +170,20 @@ const BillboardsDashboard = () => {
         Object.entries(formValues).forEach(([key, value]) => {
             if (value !== "") {
                 if (value === undefined) return;
-                queryList.push(`${key}='${value}'`);
+                if (value.length === 0) return;
+                let queryString = [];
+                value.forEach((item, i) => {
+                    if (value.length > 1 && i === 0) {
+                        queryString.push(`( ${key}='${item}' OR `);
+                    } else if (value.length > 1 && i === value.length - 1) {
+                        queryString.push(`${key}='${item}' )`);
+                    } else if (value.length > 1 && i !== value.length - 1) {
+                        queryString.push(`${key}='${item}' OR `);
+                    } else {
+                        queryString.push(`${key}='${item}'`);
+                    }
+                });
+                queryList.push(queryString.join(""));
             }
         });
         let finalQuery = queryList.join(" AND ");
@@ -190,18 +255,61 @@ const BillboardsDashboard = () => {
                                     render={({ field }) => (
                                         <Select
                                             {...field}
+                                            multiple
                                             labelId="type-label"
                                             id="type"
-                                            label="نوع اليافطة"
+                                            value={field.value || []}
+                                            onChange={(event) =>
+                                                field.onChange(
+                                                    event.target.value
+                                                )
+                                            }
+                                            renderValue={(selected) =>
+                                                selected
+                                                    .map((value) => {
+                                                        switch (value) {
+                                                            case 0:
+                                                                return "رقمية";
+                                                            case 1:
+                                                                return "ثابتة";
+                                                            case 2:
+                                                                return "دوارة";
+                                                            default:
+                                                                return "";
+                                                        }
+                                                    })
+                                                    .join(", ")
+                                            }
                                         >
-                                            <MenuItem value="">الكل</MenuItem>
-                                            <MenuItem value={0}>رقمية</MenuItem>
-                                            <MenuItem value={1}>ثابتة</MenuItem>
-                                            <MenuItem value={2}>دوارة</MenuItem>
+                                            <MenuItem value={0}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        0
+                                                    )}
+                                                />
+                                                <ListItemText primary="رقمية" />
+                                            </MenuItem>
+                                            <MenuItem value={1}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        1
+                                                    )}
+                                                />
+                                                <ListItemText primary="ثابتة" />
+                                            </MenuItem>
+                                            <MenuItem value={2}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        2
+                                                    )}
+                                                />
+                                                <ListItemText primary="دوارة" />
+                                            </MenuItem>
                                         </Select>
                                     )}
                                 />
                             </FormControl>
+
                             {/* orientation */}
                             <FormControl
                                 variant="standard"
@@ -216,17 +324,64 @@ const BillboardsDashboard = () => {
                                     render={({ field }) => (
                                         <Select
                                             {...field}
+                                            multiple
                                             labelId="orientation-label"
                                             id="orientation"
-                                            label="إتجاه اليافطة"
+                                            value={field.value || []}
+                                            onChange={(e) =>
+                                                field.onChange(e.target.value)
+                                            }
+                                            renderValue={(selected) =>
+                                                selected
+                                                    .map((val) => {
+                                                        switch (val) {
+                                                            case 0:
+                                                                return "شمال";
+                                                            case 1:
+                                                                return "جنوب";
+                                                            case 2:
+                                                                return "شارع داخلى";
+                                                            case 3:
+                                                                return "مزدوج";
+                                                            default:
+                                                                return "";
+                                                        }
+                                                    })
+                                                    .join(", ")
+                                            }
                                         >
-                                            <MenuItem value="">الكل</MenuItem>
-                                            <MenuItem value={0}>شمال</MenuItem>
-                                            <MenuItem value={1}>جنوب</MenuItem>
-                                            <MenuItem value={2}>
-                                                شارع داخلى
+                                            <MenuItem value={0}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        0
+                                                    )}
+                                                />
+                                                <ListItemText primary="شمال" />
                                             </MenuItem>
-                                            <MenuItem value={3}>مزدوج</MenuItem>
+                                            <MenuItem value={1}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        1
+                                                    )}
+                                                />
+                                                <ListItemText primary="جنوب" />
+                                            </MenuItem>
+                                            <MenuItem value={2}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        2
+                                                    )}
+                                                />
+                                                <ListItemText primary="شارع داخلى" />
+                                            </MenuItem>
+                                            <MenuItem value={3}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        3
+                                                    )}
+                                                />
+                                                <ListItemText primary="مزدوج" />
+                                            </MenuItem>
                                         </Select>
                                     )}
                                 />
@@ -245,21 +400,49 @@ const BillboardsDashboard = () => {
                                     render={({ field }) => (
                                         <Select
                                             {...field}
+                                            multiple
                                             labelId="ownership-label"
                                             id="ownership"
-                                            label="المالك"
+                                            value={field.value || []}
+                                            onChange={(e) =>
+                                                field.onChange(e.target.value)
+                                            }
+                                            renderValue={(selected) =>
+                                                selected
+                                                    .map((val) => {
+                                                        switch (val) {
+                                                            case 0:
+                                                                return "شركات خاصة";
+                                                            case 1:
+                                                                return "البلدية";
+                                                            default:
+                                                                return "";
+                                                        }
+                                                    })
+                                                    .join(", ")
+                                            }
                                         >
-                                            <MenuItem value="">الكل</MenuItem>
                                             <MenuItem value={0}>
-                                                شركات خاصة
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        0
+                                                    )}
+                                                />
+                                                <ListItemText primary="شركات خاصة" />
                                             </MenuItem>
                                             <MenuItem value={1}>
-                                                البلدية
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        1
+                                                    )}
+                                                />
+                                                <ListItemText primary="البلدية" />
                                             </MenuItem>
                                         </Select>
                                     )}
                                 />
                             </FormControl>
+
                             {/* status */}
                             <FormControl
                                 variant="standard"
@@ -274,16 +457,54 @@ const BillboardsDashboard = () => {
                                     render={({ field }) => (
                                         <Select
                                             {...field}
+                                            multiple
                                             labelId="status-label"
                                             id="status"
-                                            label="حالة اللوحة"
+                                            value={field.value || []}
+                                            onChange={(e) =>
+                                                field.onChange(e.target.value)
+                                            }
+                                            renderValue={(selected) =>
+                                                selected
+                                                    .map((val) => {
+                                                        switch (val) {
+                                                            case 0:
+                                                                return "نشطة";
+                                                            case 1:
+                                                                return "قيد الصيانة";
+                                                            case 2:
+                                                                return "معطلة";
+                                                            default:
+                                                                return "";
+                                                        }
+                                                    })
+                                                    .join(", ")
+                                            }
                                         >
-                                            <MenuItem value="">الكل</MenuItem>
-                                            <MenuItem value={0}>نشطة</MenuItem>
-                                            <MenuItem value={1}>
-                                                قيد الصيانة
+                                            <MenuItem value={0}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        0
+                                                    )}
+                                                />
+                                                <ListItemText primary="نشطة" />
                                             </MenuItem>
-                                            <MenuItem value={2}>معطلة</MenuItem>
+                                            <MenuItem value={1}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        1
+                                                    )}
+                                                />
+                                                <ListItemText primary="قيد الصيانة" />
+                                            </MenuItem>
+                                            <MenuItem value={2}>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        2
+                                                    )}
+                                                />
+                                                <ListItemText primary="معطلة" />
+                                            </MenuItem>
                                         </Select>
                                     )}
                                 />
@@ -291,7 +512,7 @@ const BillboardsDashboard = () => {
                         </form>
                     </div>
                     {/* map */}
-                    <Map />
+                    <Map setView={setView} />
                 </div>
             </div>
         </motion.div>

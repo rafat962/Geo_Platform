@@ -13,6 +13,8 @@ export const useMap = (basemap = "satellite", ...layers) => {
         let { view, map } = useView(viewRef, basemap, ...layers);
         setView(view);
         setmap(map);
+        // Wait for the view to be ready before watching
+
         // --------------- widgets ---------------
         useAddWedgites(view);
     }, [basemap]);

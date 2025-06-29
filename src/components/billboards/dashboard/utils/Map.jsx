@@ -3,9 +3,16 @@ import { useMap } from "../../../../shared/hooks/useMap";
 import useView from "../../../../shared/hooks/useView";
 import { memo } from "react";
 
-const Map = memo(() => {
+const Map = memo(({ setView }) => {
     const { viewRef } = useMap(null);
-    useView(viewRef, 11, [39.22, 21.45], "satellite", billboards);
+    const { view } = useView(
+        viewRef,
+        11,
+        [39.22, 21.45],
+        "satellite",
+        billboards
+    );
+    setView(view);
     return (
         <div
             ref={viewRef}
