@@ -181,7 +181,7 @@ const SideBar = () => {
                                             handleClick={() =>
                                                 handleClick("billboardsAssets")
                                             }
-                                            headName={t("طلبات اللواحات")}
+                                            headName={t("بيانات اللواحات")}
                                         />
                                         <ToggleList.Body
                                             type="other"
@@ -190,13 +190,13 @@ const SideBar = () => {
                                             <ToggleList.Item
                                                 disable={false}
                                                 type="other"
-                                                name={t("الطلبات الحالية")}
+                                                name={t("اللوحات الحالية")}
                                                 url="/billboardsReq/CurrentReq"
                                             />
                                             <ToggleList.Item
                                                 disable={false}
                                                 type="other"
-                                                name={t("إضافة طلب")}
+                                                name={t("إضافة لوحة")}
                                                 url="/billboardsReq/AddReq"
                                             />
                                             <ToggleList.Item
@@ -210,7 +210,7 @@ const SideBar = () => {
                                             handleClick={() =>
                                                 handleClick("billboardsitself")
                                             }
-                                            headName={t("بيانات اللوحات")}
+                                            headName={t("طلبات اللوحات")}
                                         />
                                         <ToggleList.Body
                                             type="other"

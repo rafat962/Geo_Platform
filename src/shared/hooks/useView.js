@@ -9,7 +9,7 @@ function useView(
     viewRef,
     zoom = 6,
     center = [43, 18.5],
-    basemap = "streets-vector",
+    basemap = "satellite",
     ...layers
 ) {
     let map = new Map({

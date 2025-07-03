@@ -7,7 +7,6 @@ import { Button, MenuItem, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import Backdrop from "@mui/material/Backdrop";
@@ -41,12 +40,10 @@ const AssetUpdate = memo(({ data, dispatch, view }) => {
         const filteredAttr = Object.fromEntries(
             Object.entries(attr).filter(([key]) => allowedFields.includes(key))
         );
-
         // Format the date fields if they are present in filteredAttr
         if (filteredAttr.START_DATE) {
             filteredAttr.START_DATE = DataConvert(filteredAttr.START_DATE); // Format START_DATE
         }
-
         return filteredAttr;
     }
 

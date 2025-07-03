@@ -3,6 +3,7 @@ import BillboardsDashboard from "./dashboard/BillboardsDashboard";
 import BillboardsReq from "./billboardsReq/BillboardsReq";
 import CurrentReq from "./billboardsReq/CurrentReq/CurrentReq";
 import AddReq from "./billboardsReq/AddReq/AddReq";
+import { RequestProvider } from "./billboardsReq/CurrentReq/context/ReqContext";
 const billboardRoutes = [
     {
         path: "/billboardsDashboard",
@@ -10,7 +11,11 @@ const billboardRoutes = [
     },
     {
         path: "/billboardsReq",
-        element: <BillboardsReq />,
+        element: (
+            <RequestProvider>
+                <BillboardsReq />
+            </RequestProvider>
+        ),
         children: [
             {
                 path: "CurrentReq",
