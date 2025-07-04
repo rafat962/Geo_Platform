@@ -191,7 +191,6 @@ export default function ReqTable({ view }) {
     // ---------------------- row click ----------------------
     const handleClick = (event, id, row) => {
         const selectedIndex = selected.indexOf(id);
-        console.log(selectedIndex);
         let newSelected = [];
         if (selectedIndex === -1) {
             newSelected = [id];
@@ -201,7 +200,6 @@ export default function ReqTable({ view }) {
                 selected.slice(selectedIndex + 1)
             );
         }
-        console.log(row);
         useScrollToRecord(row, view, "scroll");
         setSelected(newSelected);
     };

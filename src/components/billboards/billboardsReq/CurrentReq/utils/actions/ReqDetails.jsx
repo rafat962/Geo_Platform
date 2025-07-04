@@ -28,7 +28,6 @@ const ReqDetails = memo(({ data, dispatch, view }) => {
     const { t } = useTranslation();
     const isRTL = i18next.language === "ar";
     // -----------
-    console.log(data);
     const attr = data.attributes;
     const handleBack = () => {
         useScrollToRecord(null, view, "end");

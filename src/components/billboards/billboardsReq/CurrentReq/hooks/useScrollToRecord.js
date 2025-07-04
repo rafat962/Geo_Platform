@@ -2,8 +2,6 @@ import Graphic from "@arcgis/core/Graphic";
 import Point from "@arcgis/core/geometry/Point"; // Import Point geometry class
 
 function useScrollToRecord(row = null, view, type) {
-    console.log("asd", row);
-    console.log("asd2", type);
     if (!view) return;
     if (type === "scroll") {
         const record = row.geometry;
@@ -25,8 +23,6 @@ function useScrollToRecord(row = null, view, type) {
         view.graphics.removeAll();
         // Add the graphic to the view's graphics layer
         view.graphics.add(pointGraphic);
-        console.log(record?.x);
-        console.log(record?.y);
         view?.goTo({
             center: [record?.x, record?.y],
             zoom: 15,
